@@ -1,0 +1,8 @@
+How data is stored
+
+<hallways> - a list of intraconnected hallways
+<hallway id=[int] > - a hallway identified by a number containing rooms, and entrances
+<entrance> - contained within a hallway
+<north/south/east/west id=[int] > contained within an entrance, represents hallways connected at this entrance, cardinal direction the connected hallway goes
+<rooms> - a group of rooms within a hallway
+<room number=[int] > - a room within a hallway
