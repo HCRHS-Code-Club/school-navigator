@@ -1,1 +1,17 @@
 Class Structure
+
+SchoolMap
+	Hallway[] hallways
+	save(File)
+	load(File)
+	getHallwayByID(id - int)
+	getRootHallway()
+
+Hallway
+	Intersection entrance, exit
+	Room[] rooms
+	getEntrance()
+	getExit()
+	getRooms()
+	getRoomByID(id - int)
+	 
