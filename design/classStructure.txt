@@ -6,6 +6,7 @@ SchoolMap
 	load(File)
 	getHallwayByID(id - int)
 	getRootHallway()
+	getPath(current- intersection, end- room)-arrayList(CARDINAL_DIRECTIONS)
 
 Hallway
 	Intersection entrance, exit
@@ -22,6 +23,3 @@ Intersection
 	int id
 	Hallway[CARDINAL_DIRECTIONS] paths
 	Hallway getHallway(direction CARDINAL_DIRECTIONS)
-
-Choice
-	int 
