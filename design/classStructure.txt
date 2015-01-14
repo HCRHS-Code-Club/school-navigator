@@ -14,4 +14,14 @@ Hallway
 	getExit()
 	getRooms()
 	getRoomByID(id - int)
-	 
+	
+Room
+	int id
+	
+Intersection
+	int id
+	Hallway[CARDINAL_DIRECTIONS] paths
+	Hallway getHallway(direction CARDINAL_DIRECTIONS)
+
+Choice
+	int 
