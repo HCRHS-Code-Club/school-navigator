@@ -18,6 +18,7 @@ Hallway
 	
 Room
 	int id
+	String roomNumber
 	
 Intersection
 	int id
