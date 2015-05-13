@@ -5,3 +5,9 @@ bin/
 
 build/
 .externalToolBuilders/
+dist/
+out/
+
+#IntelliJ project files
+.idea/
+*.iml

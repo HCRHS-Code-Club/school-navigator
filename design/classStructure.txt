@@ -9,6 +9,7 @@ SchoolMap
 	getPath(current- intersection, end- room)-arrayList(CARDINAL_DIRECTIONS)
 
 Hallway
+    int id
 	Intersection entrance, exit
 	Room[] rooms
 	getEntrance()
