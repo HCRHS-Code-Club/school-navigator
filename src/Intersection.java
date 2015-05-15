@@ -1,8 +1,14 @@
-
-public class Intersection
-{
+public class Intersection implements Comparable<Intersection> {
     public int id;
     private Hallway[] paths;
+    public double minDistance = Double.POSITIVE_INFINITY;
+    public Intersection previous;
+
+    public Intersection(){}
+    public Intersection(int id, Hallway[] paths) {
+        this.id = id;
+        this.paths = paths;
+    }
     public Hallway[] getAllHallways() {
         return paths;
     }
@@ -14,5 +20,9 @@ public class Intersection
             case 'w': return paths[3];
             default: return null;
         }
+    }
+    public int compareTo(Intersection other)
+    {
+        return Double.compare(minDistance, other.minDistance);
     }
 }

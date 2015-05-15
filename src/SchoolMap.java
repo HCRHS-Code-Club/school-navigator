@@ -1,6 +1,8 @@
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class SchoolMap
 {
@@ -21,41 +23,37 @@ public class SchoolMap
 
     void getRootHallway() {}
 
-    void find(Intersection start, Intersection end) {
-        path = new ArrayList<Intersection>();
-        search(start, end, new ArrayList<Integer>());
-    }
+    public static void computePaths(Intersection source)
+    {
+        source.minDistance = 0.;
+        PriorityQueue<Intersection> IntersectionQueue = new PriorityQueue<Intersection>();
+        IntersectionQueue.add(source);
 
-    boolean search(Intersection current, Intersection end, List<Integer> visited) {
-        if(current.id == end.id) {
-            return true;
-        } else if(inList(visited, current.id)) {
-            return false;
-        } else {
-            visited.add(current.id);
-            for(Hallway hallway: current.getAllHallways()) {
-                if (hallway.getEntrance().equals(current)) {
-                    if(search(hallway.getExit(), end, visited)) {
-                        path.add(current);
-                        return true;
-                    }
-                } else {
-                    if(search(hallway.getEntrance(), end, visited)) {
-                        path.add(current);
-                        return true;
-                    }
+        while (!IntersectionQueue.isEmpty()) {
+            Intersection u = IntersectionQueue.poll();
+
+            // Visit each Hallway exiting u
+            for (Hallway e : u.getAllHallways())
+            {
+                Intersection i = e.getOtherEnd(u.id);
+                double weight = e.length;
+                double distanceThroughU = u.minDistance + weight;
+                if (distanceThroughU < i.minDistance) {
+                    IntersectionQueue.remove(i);
+                    i.minDistance = distanceThroughU ;
+                    i.previous = u;
+                    IntersectionQueue.add(i);
                 }
             }
-            return false;
         }
-
     }
 
-    boolean inList(List<Integer> list, int find) {
-        for(int i : list) {
-            if(i == find)
-                return true;
-        }
-        return false;
+    public static List<Intersection> getShortestPathTo(Intersection target)
+    {
+        List<Intersection> path = new ArrayList<Intersection>();
+        for (Intersection Intersection = target; Intersection != null; Intersection = Intersection.previous)
+            path.add(Intersection);
+        Collections.reverse(path);
+        return path;
     }
 }
