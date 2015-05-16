@@ -1,3 +1,5 @@
+package SchoolNavigator;
+
 public class Intersection implements Comparable<Intersection> {
     public int id;
     private Hallway[] paths;

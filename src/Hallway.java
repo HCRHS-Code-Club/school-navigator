@@ -1,3 +1,5 @@
+package SchoolNavigator;
+
 public class Hallway {
     public int id;
     private Intersection entrance, exit;

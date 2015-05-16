@@ -1,3 +1,5 @@
+package SchoolNavigator;
+
 import java.util.List;
 
 public class TestRunner extends SchoolMap {

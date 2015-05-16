@@ -1,3 +1,4 @@
+package SchoolNavigator;
 
 public class Room
 {
