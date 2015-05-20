@@ -37,7 +37,7 @@ public class SchoolMap
             // Visit each Hallway exiting u
             for (Hallway e : u.getAllHallways())
             {
-                Intersection i = e.getOtherEnd(u.id);
+                Intersection i = e.getOtherEnd(u);
                 double weight = e.length;
                 double distanceThroughU = u.minDistance + weight;
                 if (distanceThroughU < i.minDistance) {
