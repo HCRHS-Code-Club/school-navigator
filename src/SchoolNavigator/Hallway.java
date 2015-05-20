@@ -37,10 +37,10 @@ public class Hallway {
         }
         return null;
     }
-    public Intersection getOtherEnd(int id) {
-        if(entrance.id == id)
+    public Intersection getOtherEnd(Intersection i) {
+        if(entrance.equals(i))
             return exit;
-        else if(exit.id == id)
+        else if(exit.equals(i))
             return entrance;
         else
             return null;
