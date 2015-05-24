@@ -6,7 +6,7 @@ public class TestRunner extends SchoolMap {
 
 
     public static void main(String[] args) {
-        Hallway h1 = new Hallway(1);
+        Hallway h1 = new Hallway(1, new Room[]{new Room(100)});
         Hallway h2 = new Hallway(2);
         Hallway h3 = new Hallway(3);
         Hallway h4 = new Hallway(4);
@@ -14,7 +14,7 @@ public class TestRunner extends SchoolMap {
         Hallway h6 = new Hallway(6);
         Hallway h7 = new Hallway(7);
         Hallway h8 = new Hallway(8);
-        Hallway h9 = new Hallway(9);
+        Hallway h9 = new Hallway(9, new Room[]{new Room(919)});
 
         Intersection i1 = new Intersection(1, new Hallway[]{h1});
         Intersection i2 = new Intersection(2, new Hallway[]{h2, h9});
@@ -38,16 +38,29 @@ public class TestRunner extends SchoolMap {
 
         h4.length = .5;
 
-        Intersection[] vertices = { i1, i2, i3, i4, i5, i6, i7, i8, i9 };
-        computePaths(i1);
-        for (Intersection i : vertices)
-        {
-            System.out.println("Distance to " + i.id + ": " + i.minDistance);
-            List<Intersection> path = getShortestPathTo(i);
-            System.out.print("Path: ");
-            for (Intersection j : path)
-                System.out.print(j.id + ", ");
-            System.out.println("");
-        }
+        Room start = h1.getRooms()[0];
+        Room end = h9.getRooms()[0];
+        Hallway startHall = start.hallway;
+        Hallway endHall = end.hallway;
+        Intersection dStart = new Intersection();
+        Intersection dEnd = new Intersection();
+        Hallway sTemp1 = new Hallway(startHall.getEntrance(), dStart);
+        Hallway sTemp2 = new Hallway(dStart, startHall.getExit());
+        Hallway eTemp1 = new Hallway(endHall.getEntrance(), dEnd);
+        Hallway eTemp2 = new Hallway(dEnd, endHall.getExit());
+        startHall.getEntrance().replaceHallway(startHall, sTemp1);
+        startHall.getExit().replaceHallway(startHall, sTemp2);
+        endHall.getEntrance().replaceHallway(endHall, eTemp1);
+        endHall.getExit().replaceHallway(endHall, eTemp2);
+        dStart.setHallways(new Hallway[]{sTemp1, sTemp2});
+        dEnd.setHallways(new Hallway[]{eTemp1, eTemp2});
+
+        computePaths(dStart);
+        System.out.println("Distance to " + start.id + ": " + dEnd.minDistance);
+        List<Intersection> path = getShortestPathTo(dEnd);
+        System.out.print("Path: ");
+        for (Intersection j : path)
+            System.out.print(j.id + ", ");
+        System.out.println("");
     }
 }
