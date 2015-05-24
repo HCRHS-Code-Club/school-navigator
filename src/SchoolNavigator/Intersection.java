@@ -2,18 +2,18 @@ package SchoolNavigator;
 
 public class Intersection implements Comparable<Intersection> {
     public int id;
-    private Hallway[] paths, bPaths;
+    private Hallway[] paths;
     public double minDistance = Double.POSITIVE_INFINITY;
     public Intersection previous;
     boolean altered = false;
 
     public Intersection(){}
+    public Intersection(int id) {
+        this.id = id;
+    }
     public Intersection(int id, Hallway[] paths) {
         this.id = id;
         this.paths = paths;
-        bPaths = new Hallway[paths.length];
-        for(int i = 0; i < paths.length; i++)
-            bPaths[i] = new Hallway(paths[i]);
     }
 
     public Intersection(Intersection intersection) {
@@ -22,7 +22,6 @@ public class Intersection implements Comparable<Intersection> {
         this.minDistance = intersection.minDistance;
         this.previous = intersection.previous;
         this.altered = intersection.altered;
-        this.bPaths = intersection.bPaths;
     }
 
     public Hallway[] getAllHallways() {
@@ -51,11 +50,5 @@ public class Intersection implements Comparable<Intersection> {
     public int compareTo(Intersection other)
     {
         return Double.compare(minDistance, other.minDistance);
-    }
-    public void revert() {
-        altered = false;
-        paths = new Hallway[bPaths.length];
-        for(int i = 0; i < bPaths.length; i++)
-            paths[i] = new Hallway(bPaths[i]);
     }
 }

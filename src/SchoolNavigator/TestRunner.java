@@ -13,8 +13,8 @@ public class TestRunner extends SchoolMap {
         Hallway h5 = new Hallway(5);
         Hallway h6 = new Hallway(6);
         Hallway h7 = new Hallway(7);
-        Hallway h8 = new Hallway(8);
-        Hallway h9 = new Hallway(9, new Room[]{new Room(919)});
+        Hallway h8 = new Hallway(8, new Room[]{new Room(919)});
+        Hallway h9 = new Hallway(9);
 
         Intersection i1 = new Intersection(1, new Hallway[]{h1});
         Intersection i2 = new Intersection(2, new Hallway[]{h2, h9});
@@ -39,11 +39,11 @@ public class TestRunner extends SchoolMap {
         h4.length = .5;
 
         Room start = h1.getRooms()[0];
-        Room end = h9.getRooms()[0];
+        Room end = h8.getRooms()[0];
         Hallway startHall = start.hallway;
         Hallway endHall = end.hallway;
-        Intersection dStart = new Intersection();
-        Intersection dEnd = new Intersection();
+        Intersection dStart = new Intersection(20);
+        Intersection dEnd = new Intersection(21);
         Hallway sTemp1 = new Hallway(startHall.getEntrance(), dStart);
         Hallway sTemp2 = new Hallway(dStart, startHall.getExit());
         Hallway eTemp1 = new Hallway(endHall.getEntrance(), dEnd);
@@ -56,11 +56,11 @@ public class TestRunner extends SchoolMap {
         dEnd.setHallways(new Hallway[]{eTemp1, eTemp2});
 
         computePaths(dStart);
-        System.out.println("Distance to " + start.id + ": " + dEnd.minDistance);
+        System.out.println("Distance to " + dEnd.id + ": " + dEnd.minDistance);
         List<Intersection> path = getShortestPathTo(dEnd);
         System.out.print("Path: ");
         for (Intersection j : path)
             System.out.print(j.id + ", ");
-        System.out.println("");
+
     }
 }
