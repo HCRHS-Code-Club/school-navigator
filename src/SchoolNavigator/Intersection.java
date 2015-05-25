@@ -1,17 +1,25 @@
 package SchoolNavigator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Intersection implements Comparable<Intersection> {
     public int id;
-    private Hallway[] paths;
+    public int[] pathIds;
+    public List<Hallway> paths;
     public double minDistance = Double.POSITIVE_INFINITY;
     public Intersection previous;
     boolean altered = false;
 
-    public Intersection(){}
+    public Intersection(){
+        paths = new ArrayList<Hallway>();
+    }
     public Intersection(int id) {
+        paths = new ArrayList<Hallway>();
         this.id = id;
     }
-    public Intersection(int id, Hallway[] paths) {
+    public Intersection(int id, List<Hallway> paths) {
+        paths = new ArrayList<Hallway>();
         this.id = id;
         this.paths = paths;
     }
@@ -24,27 +32,18 @@ public class Intersection implements Comparable<Intersection> {
         this.altered = intersection.altered;
     }
 
-    public Hallway[] getAllHallways() {
+    public List<Hallway> getAllHallways() {
         return paths;
     }
-    public Hallway getHallway(char direction) {
-        switch (direction) {
-            case 'n': return paths[0];
-            case 'e': return paths[1];
-            case 's': return paths[2];
-            case 'w': return paths[3];
-            default: return null;
-        }
-    }
     public void replaceHallway(Hallway oldHall, Hallway newHall) {
-        for(int i = 0; i < paths.length; i++) {
-            if(paths[i].equals(oldHall)) {
-                paths[i] = newHall;
+        for(int i = 0; i < paths.size(); i++) {
+            if(paths.get(i).equals(oldHall)) {
+                paths.set(i, newHall);
             }
         }
 
     }
-    public void setHallways(Hallway[] hallways) {
+    public void setHallways(List<Hallway> hallways) {
         paths = hallways;
     }
     public int compareTo(Intersection other)

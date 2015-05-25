@@ -1,12 +1,25 @@
 package SchoolNavigator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TestRunner extends SchoolMap {
 
 
     public static void main(String[] args) {
-        Hallway h1 = new Hallway(1, new Room[]{new Room(100)});
+
+        List<Hallway> hallways = new ArrayList<Hallway>();
+        List<Intersection> intersections = new ArrayList<Intersection>();
+        Parser.parse(hallways, intersections);
+        for(Intersection intersection: intersections) {
+            System.out.printf("%i, ", intersection.id);
+        }
+        System.out.println();
+        for(Hallway hallway: hallways) {
+            System.out.printf("%i, ", hallway.id);
+        }
+
+        /*Hallway h1 = new Hallway(1, new Room[]{new Room(100)});
         Hallway h2 = new Hallway(2);
         Hallway h3 = new Hallway(3);
         Hallway h4 = new Hallway(4);
@@ -56,11 +69,11 @@ public class TestRunner extends SchoolMap {
         dEnd.setHallways(new Hallway[]{eTemp1, eTemp2});
 
         computePaths(dStart);
-        System.out.println("Distance to " + dEnd.id + ": " + dEnd.minDistance);
+        System.out.printf("Distance to %d : %.1f\n",dEnd.id, dEnd.minDistance);
         List<Intersection> path = getShortestPathTo(dEnd);
         System.out.print("Path: ");
         for (Intersection j : path)
             System.out.print(j.id + ", ");
-
+        System.out.println();*/
     }
 }

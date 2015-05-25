@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map>
+    <Hallway id="1" entrance="3" exit="1" length="1">
+        <Room id="1" roomNumber="100" />
+    </Hallway>
+    <Hallway id="2" entrance="2" exit="3" length="1">
+
+    </Hallway>
+    <Hallway id="3" entrance="3" exit="4" length="1">
+
+    </Hallway>
+    <Hallway id="4" entrance="5" exit="6" length="1">
+
+    </Hallway>
+    <Hallway id="5" entrance="6" exit="3" length="1">
+
+    </Hallway>
+    <Hallway id="6" entrance="6" exit="7" length="1">
+
+    </Hallway>
+    <Hallway id="7" entrance="8" exit="6" length="1">
+
+    </Hallway>
+    <Hallway id="8" entrance="9" exit="8" length="1">
+        <Room id="2" roomNumber="918" />
+    </Hallway>
+    <Hallway id="9" entrance="5" exit="2" length="1">
+
+    </Hallway>
+
+    <Intersection id="1" paths="1" />
+    <Intersection id="2" paths="2,9" />
+    <Intersection id="3" paths="1,2,3,5" />
+    <Intersection id="4" paths="3" />
+    <Intersection id="5" paths="4,9" />
+    <Intersection id="6" paths="4,5,6,7" />
+    <Intersection id="7" paths="6" />
+    <Intersection id="8" paths="7,8" />
+    <Intersection id="9" paths="8" />
+</map>

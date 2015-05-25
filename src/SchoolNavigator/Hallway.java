@@ -1,11 +1,10 @@
 package SchoolNavigator;
 
 public class Hallway {
-    public int id;
-    private Intersection entrance, exit;
-    private Room[] rooms;
+    public int id, entranceId, exitId;
+    public Intersection entrance, exit;
+    public Room[] rooms;
     public double length = 1;
-    private double bLength;
     boolean altered = false;
 
     public Hallway(){}
@@ -23,7 +22,6 @@ public class Hallway {
         this.exit = exit;
         this.rooms = rooms;
         this.length = length;
-        bLength = length;
         setHallways();
     }
     public Hallway(Intersection entrance, Intersection exit) {
@@ -36,7 +34,6 @@ public class Hallway {
         this.exit = hallway.exit;
         this.rooms = hallway.rooms;
         this.length = hallway.length;
-        bLength = hallway.bLength;
         setHallways();
     }
     public void setUp(Intersection entrance, Intersection exit) {
