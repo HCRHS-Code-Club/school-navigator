@@ -15,18 +15,17 @@ public class Parser {
             Document document = saxBuilder.build(inputFile);
             Element classElement = document.getRootElement();
             List<Element> elementList = classElement.getChildren();
-            Hallway tempHallway = new Hallway();
-            Intersection tempIntersection = new Intersection();
-            Room tempRoom = new Room();
-            List<Room> tempRooms = new ArrayList<Room>();
             for(Element element : elementList) {
-                //System.out.printf("%s, ", element.getName());
+                Hallway tempHallway = new Hallway();
+                Intersection tempIntersection = new Intersection();
+                Room tempRoom = new Room();
+                List<Room> tempRooms = new ArrayList<Room>();
                 if(element.getName().equals("Hallway")) {
                     tempHallway.id = element.getAttribute("id").getIntValue();
                     tempHallway.entranceId = element.getAttribute("entrance").getIntValue();
                     tempHallway.exitId = element.getAttribute("exit").getIntValue();
                     for(Element roomElement: element.getChildren()) {
-                        if(element.getName().equals("Room")) {
+                        if(roomElement.getName().equals("Room")) {
                             tempRoom.roomNumber = roomElement.getAttributeValue("roomNumber");
                             tempRooms.add(tempRoom);
                         }
@@ -38,7 +37,7 @@ public class Parser {
                     String[] paths = element.getAttributeValue("paths").split(",");
                     for(int i = 0; i < paths.length; i++) {
                         try {
-                            tempIntersection.pathIds[i] = Integer.parseInt(paths[i]);
+                            tempIntersection.pathIds.add(Integer.parseInt(paths[i]));
                         } catch (NumberFormatException e) {
                             e.printStackTrace();
                         }

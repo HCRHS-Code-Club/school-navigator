@@ -38,6 +38,8 @@ public class SchoolMap
             for (Hallway e : u.getAllHallways())
             {
                 Intersection i = e.getOtherEnd(u);
+                if(i == null)
+                    System.out.println("Data Mismatch");
                 double weight = e.length;
                 double distanceThroughU = u.minDistance + weight;
                 if (distanceThroughU < i.minDistance) {

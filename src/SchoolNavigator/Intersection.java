@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Intersection implements Comparable<Intersection> {
     public int id;
-    public int[] pathIds;
+    public List<Integer> pathIds;
     public List<Hallway> paths;
     public double minDistance = Double.POSITIVE_INFINITY;
     public Intersection previous;
@@ -13,13 +13,16 @@ public class Intersection implements Comparable<Intersection> {
 
     public Intersection(){
         paths = new ArrayList<Hallway>();
+        pathIds = new ArrayList<Integer>();
     }
     public Intersection(int id) {
         paths = new ArrayList<Hallway>();
+        pathIds = new ArrayList<Integer>();
         this.id = id;
     }
     public Intersection(int id, List<Hallway> paths) {
         paths = new ArrayList<Hallway>();
+        pathIds = new ArrayList<Integer>();
         this.id = id;
         this.paths = paths;
     }
@@ -27,6 +30,7 @@ public class Intersection implements Comparable<Intersection> {
     public Intersection(Intersection intersection) {
         this.id = intersection.id;
         this.paths = intersection.paths;
+        this.pathIds = intersection.pathIds;
         this.minDistance = intersection.minDistance;
         this.previous = intersection.previous;
         this.altered = intersection.altered;

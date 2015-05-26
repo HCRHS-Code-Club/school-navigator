@@ -32,6 +32,8 @@ public class Hallway {
         this.id = hallway.id;
         this.entrance = hallway.entrance;
         this.exit = hallway.exit;
+        this.entranceId = hallway.entranceId;
+        this.exitId = hallway.exitId;
         this.rooms = hallway.rooms;
         this.length = hallway.length;
         setHallways();

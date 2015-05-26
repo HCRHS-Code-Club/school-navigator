@@ -1,6 +1,7 @@
 package SchoolNavigator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TestRunner extends SchoolMap {
@@ -12,12 +13,16 @@ public class TestRunner extends SchoolMap {
         List<Intersection> intersections = new ArrayList<Intersection>();
         Parser.parse(hallways, intersections);
         for(Intersection intersection: intersections) {
-            System.out.printf("%i, ", intersection.id);
+            System.out.printf("%d: ", intersection.id);
+            for(Hallway h : intersection.paths) {
+                System.out.printf("%d, ", h.id);
+            }
+            System.out.println();
         }
-        System.out.println();
+/*        System.out.println();
         for(Hallway hallway: hallways) {
-            System.out.printf("%i, ", hallway.id);
-        }
+            System.out.printf("%d:%.0f, ", hallway.id, hallway.length);
+        }*/
 
         /*Hallway h1 = new Hallway(1, new Room[]{new Room(100)});
         Hallway h2 = new Hallway(2);
@@ -50,9 +55,9 @@ public class TestRunner extends SchoolMap {
         h9.setUp(i5, i2);
 
         h4.length = .5;
-
-        Room start = h1.getRooms()[0];
-        Room end = h8.getRooms()[0];
+        */
+        Room start = hallways.get(0).getRooms()[0];
+        Room end = hallways.get(7).getRooms()[0];
         Hallway startHall = start.hallway;
         Hallway endHall = end.hallway;
         Intersection dStart = new Intersection(20);
@@ -65,8 +70,8 @@ public class TestRunner extends SchoolMap {
         startHall.getExit().replaceHallway(startHall, sTemp2);
         endHall.getEntrance().replaceHallway(endHall, eTemp1);
         endHall.getExit().replaceHallway(endHall, eTemp2);
-        dStart.setHallways(new Hallway[]{sTemp1, sTemp2});
-        dEnd.setHallways(new Hallway[]{eTemp1, eTemp2});
+        dStart.setHallways(new ArrayList<Hallway>(Arrays.asList(sTemp1, sTemp2)));
+        dEnd.setHallways(new ArrayList<Hallway>(Arrays.asList(eTemp1, eTemp2)));
 
         computePaths(dStart);
         System.out.printf("Distance to %d : %.1f\n",dEnd.id, dEnd.minDistance);
@@ -74,6 +79,6 @@ public class TestRunner extends SchoolMap {
         System.out.print("Path: ");
         for (Intersection j : path)
             System.out.print(j.id + ", ");
-        System.out.println();*/
+        System.out.println();
     }
 }
