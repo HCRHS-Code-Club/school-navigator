@@ -4,7 +4,6 @@ import java.util.*;
 
 public class TestRunner extends SchoolMap {
 
-
     public static void main(String[] args) {
 
         List<Hallway> hallways = new ArrayList<Hallway>();
