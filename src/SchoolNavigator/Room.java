@@ -21,4 +21,9 @@ public class Room
         this.roomNumber = roomNumber;
         this.hallway = hallway;
     }
+    public Room(Room room) {
+        this.id = room.id;
+        this.roomNumber = room.roomNumber;
+        this.hallway = room.hallway;
+    }
 }
