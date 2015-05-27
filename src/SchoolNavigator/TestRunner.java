@@ -12,13 +12,13 @@ public class TestRunner extends SchoolMap {
         List<Hallway> hallways = new ArrayList<Hallway>();
         List<Intersection> intersections = new ArrayList<Intersection>();
         Parser.parse(hallways, intersections);
-        for(Intersection intersection: intersections) {
+        /*for(Intersection intersection: intersections) {
             System.out.printf("%d: ", intersection.id);
             for(Hallway h : intersection.paths) {
                 System.out.printf("%d, ", h.id);
             }
             System.out.println();
-        }
+        }*/
 /*        System.out.println();
         for(Hallway hallway: hallways) {
             System.out.printf("%d:%.0f, ", hallway.id, hallway.length);
