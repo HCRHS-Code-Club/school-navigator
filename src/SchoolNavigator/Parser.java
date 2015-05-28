@@ -24,6 +24,7 @@ public class Parser {
                     tempHallway.id = element.getAttribute("id").getIntValue();
                     tempHallway.entranceId = element.getAttribute("entrance").getIntValue();
                     tempHallway.exitId = element.getAttribute("exit").getIntValue();
+                    tempHallway.direction = element.getAttributeValue("direction");
                     for(Element roomElement: element.getChildren()) {
                         if(roomElement.getName().equals("Room")) {
                             tempRoom.roomNumber = roomElement.getAttributeValue("roomNumber");

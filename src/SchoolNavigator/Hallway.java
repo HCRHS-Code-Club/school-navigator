@@ -5,6 +5,7 @@ public class Hallway {
     public Intersection entrance, exit;
     public Room[] rooms;
     public double length = 1;
+    public String direction;
     boolean altered = false;
 
     public Hallway(){}
@@ -24,9 +25,10 @@ public class Hallway {
         this.length = length;
         setHallways();
     }
-    public Hallway(Intersection entrance, Intersection exit) {
+    public Hallway(Intersection entrance, Intersection exit, String direction) {
         this.entrance = entrance;
         this.exit = exit;
+        this.direction = direction;
     }
     public Hallway(Hallway hallway) {
         this.id = hallway.id;
@@ -36,6 +38,7 @@ public class Hallway {
         this.exitId = hallway.exitId;
         this.rooms = hallway.rooms;
         this.length = hallway.length;
+        this.direction = hallway.direction;
         setHallways();
     }
     public void setUp(Intersection entrance, Intersection exit) {

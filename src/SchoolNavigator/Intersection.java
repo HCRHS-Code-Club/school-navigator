@@ -47,6 +47,16 @@ public class Intersection implements Comparable<Intersection> {
         }
 
     }
+    public Hallway connecting(Intersection otherEnd) {
+        for(Hallway i : this.paths) {
+            for(Hallway j : otherEnd.paths) {
+                if(i.equals(j)) {
+                    return i;
+                }
+            }
+        }
+        return null;
+    }
     public void setHallways(List<Hallway> hallways) {
         paths = hallways;
     }

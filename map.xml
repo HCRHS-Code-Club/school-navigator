@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map>
-    <Hallway id="1" entrance="3" exit="1" length="1">
+    <Hallway id="1" entrance="3" exit="1" length="1" direction="ew">
         <Room roomNumber="100" />
         <Room roomNumber="101" />
         <Room roomNumber="102" />
     </Hallway>
-    <Hallway id="2" entrance="2" exit="3" length="1">
+    <Hallway id="2" entrance="2" exit="3" length="1" direction="ns">
 
     </Hallway>
-    <Hallway id="3" entrance="3" exit="4" length="1">
+    <Hallway id="3" entrance="3" exit="4" length="1" direction="ns">
 
     </Hallway>
-    <Hallway id="4" entrance="5" exit="6" length="1">
+    <Hallway id="4" entrance="5" exit="6" length="1" direction="ns">
 
     </Hallway>
-    <Hallway id="5" entrance="6" exit="3" length="1">
+    <Hallway id="5" entrance="6" exit="3" length="1" direction="ew">
 
     </Hallway>
-    <Hallway id="6" entrance="6" exit="7" length="1">
+    <Hallway id="6" entrance="6" exit="7" length="1" direction="ns">
 
     </Hallway>
-    <Hallway id="7" entrance="8" exit="6" length="1">
+    <Hallway id="7" entrance="8" exit="6" length="1" direction="ew">
 
     </Hallway>
-    <Hallway id="8" entrance="9" exit="8" length="1">
+    <Hallway id="8" entrance="9" exit="8" length="1" direction="ns">
         <Room roomNumber="818" />
     </Hallway>
-    <Hallway id="9" entrance="5" exit="2" length="1">
+    <Hallway id="9" entrance="5" exit="2" length="1" direction="ew">
         <Room roomNumber="918" />
     </Hallway>
 
