@@ -6,25 +6,9 @@ public class Hallway {
     public Room[] rooms;
     public double length = 1;
     public String direction;
-    boolean altered = false;
 
     public Hallway(){}
-    public Hallway(int id) {
-        this.id = id;
-    }
-    public Hallway(int id, Room[] rooms) {
-        this.id = id;
-        this.rooms = rooms;
-        setHallways();
-    }
-    public Hallway(int id, Intersection entrance, Intersection exit, Room[] rooms, double length) {
-        this.id = id;
-        this.entrance = entrance;
-        this.exit = exit;
-        this.rooms = rooms;
-        this.length = length;
-        setHallways();
-    }
+
     public Hallway(Intersection entrance, Intersection exit, String direction) {
         this.entrance = entrance;
         this.exit = exit;
@@ -53,13 +37,6 @@ public class Hallway {
     }
     public Room[] getRooms() {
         return rooms;
-    }
-    public Room getRoomById(int id) {
-        for(Room room : rooms) {
-            if(room.id == id)
-                return room;
-        }
-        return null;
     }
     public Intersection getOtherEnd(Intersection i) {
         if(entrance.equals(i))

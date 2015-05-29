@@ -2,19 +2,23 @@ package SchoolNavigator;
 
 import java.util.*;
 
-public class TestRunner extends SchoolMap {
+public class TestRunner {
 
     public static void main(String[] args) {
 
+        //Declare vars
         List<Hallway> hallways = new ArrayList<Hallway>();
         List<Intersection> intersections = new ArrayList<Intersection>();
-        Parser.parse(hallways, intersections);
         Scanner scanner = new Scanner(System.in);
         Room start = null, end = null;
         Hallway startHall, endHall, sTemp1, sTemp2, eTemp1, eTemp2;
         Intersection dStart, dEnd;
         String input, output;
+
+        //Parse XML
+        SchoolMap.parse(hallways, intersections);
         while (true) {
+            //Get Input
             try {
                 System.out.print("Enter start room: ");
                 input = scanner.nextLine();
@@ -26,6 +30,7 @@ public class TestRunner extends SchoolMap {
             if(input.equals(""))
                 break;
             else {
+                //Find rooms
                 for(int i = 0; i < hallways.size(); i++) {
                     for(int j = 0; j < hallways.get(i).getRooms().length; j++) {
                         //System.out.printf("%s\n", hallways.get(i).getRooms()[j].roomNumber);
@@ -44,8 +49,8 @@ public class TestRunner extends SchoolMap {
                     System.out.println("End room not found");
                 return;
             }
-            //start = hallways.get(0).getRooms()[0];
-            //end = hallways.get(7).getRooms()[0];
+
+            //Setup
             startHall = start.hallway;
             endHall = end.hallway;
             dStart = new Intersection(20);
@@ -61,77 +66,17 @@ public class TestRunner extends SchoolMap {
             dStart.setHallways(new ArrayList<Hallway>(Arrays.asList(sTemp1, sTemp2)));
             dEnd.setHallways(new ArrayList<Hallway>(Arrays.asList(eTemp1, eTemp2)));
 
-            computePaths(dStart);
-            System.out.printf("Distance to %d : %.1f\n",dEnd.id, dEnd.minDistance);
-            List<Intersection> path = getShortestPathTo(dEnd);
-            System.out.print("Path: ");
+            //Find Path
+            SchoolMap.computePaths(dStart);
+            //System.out.printf("Distance to %d : %.1f\n",dEnd.id, dEnd.minDistance);
+            List<Intersection> path = SchoolMap.getShortestPathTo(dEnd);
+            /*System.out.print("Path: ");
             for (Intersection k : path)
                 System.out.print(k.id + ", ");
-            System.out.println();
-            String directions = "";
-            if(startHall.direction.equals("ew") && start.face.equals("n") && startHall.getEntrance().equals(path.get(1))) {
-                directions += "Right, ";
-            } else if(startHall.direction.equals("ew") && start.face.equals("n") && startHall.getExit().equals(path.get(1))) {
-                directions += "Left, ";
-            } else if(startHall.direction.equals("ew") && start.face.equals("s") && startHall.getEntrance().equals(path.get(1))) {
-                directions += "Left, ";
-            } else if(startHall.direction.equals("ew") && start.face.equals("s") && startHall.getExit().equals(path.get(1))) {
-                directions += "Right, ";
-            } else if(startHall.direction.equals("ns") && start.face.equals("e") && startHall.getEntrance().equals(path.get(1))) {
-                directions += "Right, ";
-            } else if(startHall.direction.equals("ns") && start.face.equals("e") && startHall.getExit().equals(path.get(1))) {
-                directions += "Left, ";
-            } else if(startHall.direction.equals("ns") && start.face.equals("w") && startHall.getEntrance().equals(path.get(1))) {
-                directions += "Left, ";
-            } else if(startHall.direction.equals("ns") && start.face.equals("w") && startHall.getExit().equals(path.get(1))) {
-                directions += "Right, ";
-            }
-            for (int i = 0; i+2 < path.size(); i++) {
-                Hallway current = path.get(i).connecting(path.get(i+1));
-                Hallway next = path.get(i+1).connecting(path.get(i+2));
-                if(current.direction.equals(next.direction)) {
-                    directions += "Strait, ";
-                }else if(current.direction.equals("ew")) {
-                    if(current.getEntrance().equals(path.get(i+1)) && next.getEntrance().equals(path.get(i+1))) {
-                        directions += "Left, ";
-                    } else if(current.getExit().equals(path.get(i+1)) && next.getEntrance().equals(path.get(i+1))) {
-                        directions += "Right, ";
-                    } else if(current.getEntrance().equals(path.get(i+1)) && next.getExit().equals(path.get(i+1))) {
-                        directions += "Right, ";
-                    } else if(current.getExit().equals(path.get(i+1)) && next.getExit().equals(path.get(i+1))) {
-                        directions += "Left, ";
-                    }
-                } else {
-                    if(current.getEntrance().equals(path.get(i+1)) && next.getEntrance().equals(path.get(i+1))) {
-                        directions += "Right, ";
-                    } else if(current.getExit().equals(path.get(i+1)) && next.getEntrance().equals(path.get(i+1))) {
-                        directions += "Left, ";
-                    } else if(current.getEntrance().equals(path.get(i+1)) && next.getExit().equals(path.get(i+1))) {
-                        directions += "Left, ";
-                    } else if(current.getExit().equals(path.get(i+1)) && next.getExit().equals(path.get(i+1))) {
-                        directions += "Right, ";
-                    }
-                }
-            }
-            if(endHall.direction.equals("ew") && end.face.equals("n") && endHall.getEntrance().equals(path.get(path.size()-2))) {
-                directions += "Left, ";
-            } else if(endHall.direction.equals("ew") && end.face.equals("n") && endHall.getExit().equals(path.get(path.size()-2))) {
-                directions += "Right, ";
-            } else if(endHall.direction.equals("ew") && end.face.equals("s") && endHall.getEntrance().equals(path.get(path.size()-2))) {
-                directions += "Right, ";
-            } else if(endHall.direction.equals("ew") && end.face.equals("s") && endHall.getExit().equals(path.get(path.size()-2))) {
-                directions += "Left, ";
-            } else if(endHall.direction.equals("ns") && end.face.equals("e") && endHall.getEntrance().equals(path.get(path.size()-2))) {
-                directions += "Left, ";
-            } else if(endHall.direction.equals("ns") && end.face.equals("e") && endHall.getExit().equals(path.get(path.size()-2))) {
-                directions += "Right, ";
-            } else if(endHall.direction.equals("ns") && end.face.equals("w") && endHall.getEntrance().equals(path.get(path.size()-2))) {
-                directions += "Right, ";
-            } else if(endHall.direction.equals("ns") && end.face.equals("w") && endHall.getExit().equals(path.get(path.size()-2))) {
-                directions += "Left, ";
-            }
-            System.out.printf("%s\n", directions);
+            System.out.println();*/
+            System.out.printf("%s\n", SchoolMap.getDirections(path, startHall, endHall, start, end));
 
+            //Reset
             sTemp1.getEntrance().replaceHallway(sTemp1, startHall);
             sTemp2.getExit().replaceHallway(sTemp2, startHall);
             eTemp1.getEntrance().replaceHallway(eTemp1, endHall);
