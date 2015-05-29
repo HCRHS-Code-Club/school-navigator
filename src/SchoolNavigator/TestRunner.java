@@ -92,43 +92,43 @@ public class TestRunner extends SchoolMap {
                 if(current.direction.equals(next.direction)) {
                     directions += "Strait, ";
                 }else if(current.direction.equals("ew")) {
-                    if(current.getEntrance().equals(path.get(i)) && next.getEntrance().equals(path.get(i+1))) {
+                    if(current.getEntrance().equals(path.get(i+1)) && next.getEntrance().equals(path.get(i+1))) {
                         directions += "Left, ";
-                    } else if(current.getExit().equals(path.get(i)) && next.getEntrance().equals(path.get(i+1))) {
+                    } else if(current.getExit().equals(path.get(i+1)) && next.getEntrance().equals(path.get(i+1))) {
                         directions += "Right, ";
-                    } else if(current.getEntrance().equals(path.get(i)) && next.getExit().equals(path.get(i+1))) {
+                    } else if(current.getEntrance().equals(path.get(i+1)) && next.getExit().equals(path.get(i+1))) {
                         directions += "Right, ";
-                    } else if(current.getExit().equals(path.get(i)) && next.getExit().equals(path.get(i+1))) {
+                    } else if(current.getExit().equals(path.get(i+1)) && next.getExit().equals(path.get(i+1))) {
                         directions += "Left, ";
                     }
                 } else {
-                    if(current.getEntrance().equals(path.get(i)) && next.getEntrance().equals(path.get(i+1))) {
+                    if(current.getEntrance().equals(path.get(i+1)) && next.getEntrance().equals(path.get(i+1))) {
                         directions += "Right, ";
-                    } else if(current.getExit().equals(path.get(i)) && next.getEntrance().equals(path.get(i+1))) {
+                    } else if(current.getExit().equals(path.get(i+1)) && next.getEntrance().equals(path.get(i+1))) {
                         directions += "Left, ";
-                    } else if(current.getEntrance().equals(path.get(i)) && next.getExit().equals(path.get(i+1))) {
+                    } else if(current.getEntrance().equals(path.get(i+1)) && next.getExit().equals(path.get(i+1))) {
                         directions += "Left, ";
-                    } else if(current.getExit().equals(path.get(i)) && next.getExit().equals(path.get(i+1))) {
+                    } else if(current.getExit().equals(path.get(i+1)) && next.getExit().equals(path.get(i+1))) {
                         directions += "Right, ";
                     }
                 }
             }
-            if(endHall.direction.equals("ew") && start.face.equals("n") && endHall.getEntrance().equals(path.get(path.size()-1))) {
-                directions += "Right, ";
-            } else if(endHall.direction.equals("ew") && start.face.equals("n") && endHall.getExit().equals(path.get(path.size()-1))) {
+            if(endHall.direction.equals("ew") && end.face.equals("n") && endHall.getEntrance().equals(path.get(path.size()-2))) {
                 directions += "Left, ";
-            } else if(endHall.direction.equals("ew") && start.face.equals("s") && endHall.getEntrance().equals(path.get(path.size()-1))) {
-                directions += "Left, ";
-            } else if(endHall.direction.equals("ew") && start.face.equals("s") && endHall.getExit().equals(path.get(path.size()-1))) {
+            } else if(endHall.direction.equals("ew") && end.face.equals("n") && endHall.getExit().equals(path.get(path.size()-2))) {
                 directions += "Right, ";
-            } else if(endHall.direction.equals("ns") && start.face.equals("e") && endHall.getEntrance().equals(path.get(path.size()-1))) {
+            } else if(endHall.direction.equals("ew") && end.face.equals("s") && endHall.getEntrance().equals(path.get(path.size()-2))) {
                 directions += "Right, ";
-            } else if(endHall.direction.equals("ns") && start.face.equals("e") && endHall.getExit().equals(path.get(path.size()-1))) {
+            } else if(endHall.direction.equals("ew") && end.face.equals("s") && endHall.getExit().equals(path.get(path.size()-2))) {
                 directions += "Left, ";
-            } else if(endHall.direction.equals("ns") && start.face.equals("w") && endHall.getEntrance().equals(path.get(path.size()-1))) {
+            } else if(endHall.direction.equals("ns") && end.face.equals("e") && endHall.getEntrance().equals(path.get(path.size()-2))) {
                 directions += "Left, ";
-            } else if(endHall.direction.equals("ns") && start.face.equals("w") && endHall.getExit().equals(path.get(path.size()-1))) {
+            } else if(endHall.direction.equals("ns") && end.face.equals("e") && endHall.getExit().equals(path.get(path.size()-2))) {
                 directions += "Right, ";
+            } else if(endHall.direction.equals("ns") && end.face.equals("w") && endHall.getEntrance().equals(path.get(path.size()-2))) {
+                directions += "Right, ";
+            } else if(endHall.direction.equals("ns") && end.face.equals("w") && endHall.getExit().equals(path.get(path.size()-2))) {
+                directions += "Left, ";
             }
             System.out.printf("%s\n", directions);
 
