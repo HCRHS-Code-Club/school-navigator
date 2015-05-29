@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map>
     <Hallway id="1" entrance="3" exit="1" length="1" direction="ew">
-        <Room roomNumber="100" />
-        <Room roomNumber="101" />
-        <Room roomNumber="102" />
+        <Room roomNumber="100" face="n"/>
+        <Room roomNumber="101" face="s"/>
+        <Room roomNumber="102" face="n"/>
     </Hallway>
     <Hallway id="2" entrance="2" exit="3" length="1" direction="ns">
 
@@ -24,10 +24,10 @@
 
     </Hallway>
     <Hallway id="8" entrance="9" exit="8" length="1" direction="ns">
-        <Room roomNumber="818" />
+        <Room roomNumber="818" face="e"/>
     </Hallway>
     <Hallway id="9" entrance="5" exit="2" length="1" direction="ew">
-        <Room roomNumber="918" />
+        <Room roomNumber="918" face="n"/>
     </Hallway>
 
     <Intersection id="1" paths="1" />

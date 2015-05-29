@@ -28,6 +28,7 @@ public class Parser {
                     for(Element roomElement: element.getChildren()) {
                         if(roomElement.getName().equals("Room")) {
                             tempRoom.roomNumber = roomElement.getAttributeValue("roomNumber");
+                            tempRoom.face = roomElement.getAttributeValue("face");
                             tempRooms.add(new Room(tempRoom));
                         }
                     }
