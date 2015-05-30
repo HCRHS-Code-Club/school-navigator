@@ -1,7 +1,6 @@
 package SchoolNavigator;
 
-public class Room
-{
+public class Room {
     public int id;
     public String roomNumber;
     public Hallway hallway;
