@@ -9,7 +9,6 @@ public class Intersection implements Comparable<Intersection> {
     public List<Hallway> paths;
     public double minDistance = Double.POSITIVE_INFINITY;
     public Intersection previous;
-    boolean altered = false;
 
     public Intersection(){
         paths = new ArrayList<Hallway>();
@@ -20,20 +19,12 @@ public class Intersection implements Comparable<Intersection> {
         pathIds = new ArrayList<Integer>();
         this.id = id;
     }
-    public Intersection(int id, List<Hallway> paths) {
-        paths = new ArrayList<Hallway>();
-        pathIds = new ArrayList<Integer>();
-        this.id = id;
-        this.paths = paths;
-    }
-
     public Intersection(Intersection intersection) {
         this.id = intersection.id;
         this.paths = intersection.paths;
         this.pathIds = intersection.pathIds;
         this.minDistance = intersection.minDistance;
         this.previous = intersection.previous;
-        this.altered = intersection.altered;
     }
 
     public List<Hallway> getAllHallways() {
