@@ -19,7 +19,7 @@ public class Worker implements Runnable{
 
     public void run() {
         try {
-            BufferedReader input  = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            DataInputStream input  = new DataInputStream(clientSocket.getInputStream());
             OutputStream output = clientSocket.getOutputStream();
             String raw = null;
             String[] request = null;
@@ -27,7 +27,7 @@ public class Worker implements Runnable{
             int queueNum = roundRobin.getNext();
 
             while (clientSocket.isConnected()) {
-                if((raw = input.readLine()) != null && raw.length() > 0) {
+                if((raw = input.readUTF()) != null && raw.length() > 0) {
                     request = raw.split(",");
                     try {
                         queue[queueNum][0].put(request);

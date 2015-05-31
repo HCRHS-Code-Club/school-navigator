@@ -3,10 +3,7 @@ package SchoolNavigator;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.PriorityBlockingQueue;
+import java.util.concurrent.*;
 
 public class Server implements Runnable {
 
@@ -15,15 +12,15 @@ public class Server implements Runnable {
     private boolean isStopped = false;
     private Thread runningThread = null;
     private ExecutorService threadPool = Executors.newFixedThreadPool(10);
-    private BlockingQueue[][] queue = new PriorityBlockingQueue[5][2];
+    private BlockingQueue[][] queue = new LinkedBlockingQueue[5][2];
     private Navigator[] navigators = new Navigator[5];
     private RoundRobin roundRobin = new RoundRobin(5);
 
     public Server(int port) {
         this.port = port;
         for(int i = 0; i < navigators.length; i++) {
-            queue[i][0] = new PriorityBlockingQueue();
-            queue[i][1] = new PriorityBlockingQueue();
+            queue[i][0] = new LinkedBlockingQueue();
+            queue[i][1] = new LinkedBlockingQueue();
             navigators[i] = new Navigator(queue[i]);
             new Thread(navigators[i]).start();
         }
