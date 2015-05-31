@@ -1,49 +1,83 @@
 package SchoolNavigator;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketTimeoutException;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.PriorityBlockingQueue;
 
-public class Server extends Thread {
-    private ServerSocket serverSocket;
+public class Server implements Runnable {
 
-    public Server(int port) throws IOException {
-        serverSocket = new ServerSocket(port);
-    }
+    private int port = 8080;
+    private ServerSocket serverSocket = null;
+    private boolean isStopped = false;
+    private Thread runningThread = null;
+    private ExecutorService threadPool = Executors.newFixedThreadPool(10);
+    private BlockingQueue[][] queue = new PriorityBlockingQueue[5][2];
+    private Navigator[] navigators = new Navigator[5];
+    private RoundRobin roundRobin = new RoundRobin(5);
 
-    public void run() {
-        while(true) {
-            try {
-                System.out.println("Waiting for client on port " + serverSocket.getLocalPort() + "...");
-                Socket server = serverSocket.accept();
-                System.out.println("Connected to " + server.getRemoteSocketAddress());
-                DataInputStream in = new DataInputStream(server.getInputStream());
-                System.out.println(in.readUTF());
-                DataOutputStream out = new DataOutputStream(server.getOutputStream());
-                out.writeUTF("Thank you for connecting to " + server.getLocalSocketAddress() + "\nGoodbye!");
-                server.close();
-            }catch(SocketTimeoutException s) {
-                System.out.println("Socket timed out!");
-                break;
-            }catch(IOException e) {
-                e.printStackTrace();
-                break;
-            }
+    public Server(int port) {
+        this.port = port;
+        for(int i = 0; i < navigators.length; i++) {
+            queue[i][0] = new PriorityBlockingQueue();
+            queue[i][1] = new PriorityBlockingQueue();
+            navigators[i] = new Navigator(queue[i]);
+            new Thread(navigators[i]).start();
         }
     }
 
-    public static void main(String [] args) {
-        int port = 8888;
-        try
-        {
-            Thread t = new Server(port);
-            t.start();
-        }catch(IOException e)
-        {
-            e.printStackTrace();
+    public void run() {
+        synchronized (this) {
+            this.runningThread = Thread.currentThread();
+        }
+        openServerSocket();
+        while (!isStopped) {
+            Socket clientSocket = null;
+            try {
+                clientSocket = this.serverSocket.accept();
+            } catch (IOException e) {
+                if(isStopped) {
+                    System.out.println("Server Stopped.") ;
+                    return;
+                }
+                throw new RuntimeException("Error accepting client connection", e);
+            }
+            this.threadPool.execute(new Worker(clientSocket, queue, roundRobin));
+        }
+    }
+
+    private synchronized boolean isStopped() {
+        return this.isStopped;
+    }
+
+    public synchronized void stop(){
+        this.isStopped = true;
+        try {
+            this.serverSocket.close();
+            for(int i = 0; i < navigators.length; i++) {
+                navigators[i].stop();
+            }
+            for(int i = 0; i < queue.length; i++) {
+                try {
+                    queue[i][0].put("stop");
+                    queue[i][1].put("stop");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Error closing server", e);
+        }
+    }
+
+    private void openServerSocket() {
+        try {
+            this.serverSocket = new ServerSocket(this.port);
+        } catch (IOException e) {
+            throw new RuntimeException("Cannot open port 8080", e);
         }
     }
 }
