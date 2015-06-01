@@ -19,25 +19,28 @@ public class Worker implements Runnable{
 
     public void run() {
         try {
-            DataInputStream input  = new DataInputStream(clientSocket.getInputStream());
-            OutputStream output = clientSocket.getOutputStream();
+            BufferedReader input  = new BufferedReader( new InputStreamReader(clientSocket.getInputStream()));
+            PrintWriter output = new PrintWriter(clientSocket.getOutputStream());
             String raw = null;
             String[] request = null;
             String response = null;
             int queueNum = roundRobin.getNext();
-
-            while (clientSocket.isConnected()) {
-                if((raw = input.readUTF()) != null && raw.length() > 0) {
-                    request = raw.split(",");
-                    try {
-                        queue[queueNum][0].put(request);
-                        response = (String) queue[queueNum][1].take();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    output.write(response.getBytes());
-                }
+            raw = input.readLine();
+            System.out.printf("Received: %s\n", raw);
+            request = raw.split(",");
+            try {
+                do {
+                    queue[queueNum][0].put(request);
+                    response = (String) queue[queueNum][1].take();
+                    System.out.printf("Message: %s\n", response);
+                } while (response.equals("") || response == null);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+            System.out.printf("Sending: %s\n", response);
+            output.println(response);
+            System.out.printf("Sent: %s\n", response);
+
             output.close();
             input.close();
 

@@ -6,7 +6,7 @@ public class Runner {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Server server = new Server(8082);
+        Server server = new Server(8080);
         new Thread(server).start();
 
         System.out.println("Press any key to exit");
@@ -15,7 +15,7 @@ public class Runner {
 
         server.stop();
         scanner.close();
-        return;
+        System.exit(0);
     }
 
 }

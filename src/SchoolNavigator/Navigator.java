@@ -77,12 +77,13 @@ public class Navigator implements Runnable {
                 SchoolMap.computePaths(dStart);
                 //System.out.printf("Distance to %d : %.1f\n",dEnd.id, dEnd.minDistance);
                 List<Intersection> path = SchoolMap.getShortestPathTo(dEnd);
-            /*System.out.print("Path: ");
-            for (Intersection k : path)
-                System.out.print(k.id + ", ");
-            System.out.println();*/
+                /*System.out.print("Path: ");
+                for (Intersection k : path)
+                    System.out.print(k.id + ", ");
+                System.out.println();*/
+                String directions = SchoolMap.getDirections(path, startHall, endHall, start, end);
                 try {
-                    queue[1].put(SchoolMap.getDirections(path, startHall, endHall, start, end));
+                    queue[1].put(directions);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
