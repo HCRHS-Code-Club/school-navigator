@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+    <servlet>
+       <servlet-name>SchoolNavigator</servlet-name>
+       <servlet-class>SchoolNavigator.Main</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+       <servlet-name>SchoolNavigator</servlet-name>
+       <url-pattern>/</url-pattern>
+    </servlet-mapping>
+</web-app>

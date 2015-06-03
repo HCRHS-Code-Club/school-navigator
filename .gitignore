@@ -12,3 +12,4 @@ test/
 #IntelliJ project files
 .idea/
 *.iml
+/web_servlet/nbproject/private/
