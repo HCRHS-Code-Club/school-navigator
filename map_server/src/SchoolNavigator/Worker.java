@@ -32,12 +32,10 @@ public class Worker implements Runnable{
                 do {
                     queue[queueNum][0].put(request);
                     response = (String) queue[queueNum][1].take();
-                    System.out.printf("Message: %s\n", response);
                 } while (response.equals("") || response == null);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.printf("Sending: %s\n", response);
             output.print(response + "END");
             System.out.printf("Sent: %s\n", response);
 
@@ -47,7 +45,6 @@ public class Worker implements Runnable{
             clientSocket.close();
 
         } catch (IOException e) {
-            //report exception somewhere.
             e.printStackTrace();
         }
     }

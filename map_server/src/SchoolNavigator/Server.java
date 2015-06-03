@@ -31,7 +31,7 @@ public class Server implements Runnable {
             this.runningThread = Thread.currentThread();
         }
         openServerSocket();
-        while (!isStopped) {
+        while (!isStopped()) {
             Socket clientSocket = null;
             try {
                 clientSocket = this.serverSocket.accept();
@@ -60,7 +60,6 @@ public class Server implements Runnable {
             for(int i = 0; i < queue.length; i++) {
                 try {
                     queue[i][0].put("stop");
-                    queue[i][1].put("stop");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

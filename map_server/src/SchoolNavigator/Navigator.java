@@ -27,7 +27,7 @@ public class Navigator implements Runnable {
         SchoolMap.parse(hallways, intersections);
 
         //Get Input
-        while (!stop) {
+        while (!isStopped()) {
             try {
                 raw = queue[0].take();
             } catch (InterruptedException e) {
@@ -40,7 +40,6 @@ public class Navigator implements Runnable {
                 //Find rooms
                 for (int i = 0; i < hallways.size(); i++) {
                     for (int j = 0; j < hallways.get(i).getRooms().length; j++) {
-                        //System.out.printf("%s\n", hallways.get(i).getRooms()[j].roomNumber);
                         if (hallways.get(i).getRooms()[j].roomNumber.equals(input)) {
                             start = hallways.get(i).getRooms()[j];
                         } else if (hallways.get(i).getRooms()[j].roomNumber.equals(output)) {
@@ -75,12 +74,7 @@ public class Navigator implements Runnable {
 
                 //Find Path
                 SchoolMap.computePaths(dStart);
-                //System.out.printf("Distance to %d : %.1f\n",dEnd.id, dEnd.minDistance);
                 List<Intersection> path = SchoolMap.getShortestPathTo(dEnd);
-                /*System.out.print("Path: ");
-                for (Intersection k : path)
-                    System.out.print(k.id + ", ");
-                System.out.println();*/
                 String directions = SchoolMap.getDirections(path, startHall, endHall, start, end);
                 try {
                     queue[1].put(directions);
