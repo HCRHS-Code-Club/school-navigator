@@ -19,7 +19,14 @@ public class Client {
         out.println("100,918");
         System.out.println("Sent: 100,918");
         BufferedReader input = new BufferedReader(new InputStreamReader(s.getInputStream()));
-        String answer = input.readLine();
+        String answer = "";
+        String raw = "";
+        while (true) {
+            raw = input.readLine();
+            if(raw.equals("END"))
+                break;
+            answer += raw + "\n";
+        }
         System.out.printf("Received: %s\n", answer);
         System.exit(0);
     }

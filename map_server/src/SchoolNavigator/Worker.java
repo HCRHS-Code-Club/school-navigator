@@ -20,7 +20,7 @@ public class Worker implements Runnable{
     public void run() {
         try {
             BufferedReader input  = new BufferedReader( new InputStreamReader(clientSocket.getInputStream()));
-            PrintWriter output = new PrintWriter(clientSocket.getOutputStream());
+            PrintWriter output = new PrintWriter(clientSocket.getOutputStream(), true);
             String raw = null;
             String[] request = null;
             String response = null;
@@ -38,11 +38,13 @@ public class Worker implements Runnable{
                 e.printStackTrace();
             }
             System.out.printf("Sending: %s\n", response);
-            output.println(response);
+            output.print(response + "END");
             System.out.printf("Sent: %s\n", response);
 
+            output.flush();
             output.close();
             input.close();
+            clientSocket.close();
 
         } catch (IOException e) {
             //report exception somewhere.
