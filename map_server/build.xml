@@ -33,11 +33,11 @@
         <copy file="map.xml" todir="${dist.dir}" />
         <!-- Put everything in ${build} into the jar file -->
         <!--Removed excludes="**/*Test*.class"-->
-        <jar jarfile="${dist.dir}/school-navigator.jar" basedir="${build.dir}" >
+        <jar jarfile="${dist.dir}/school-navigator.jar" basedir="${build.dir}" excludes="TestRunner.class" >
             <zipgroupfileset dir="lib" includes="jdom-2.0.6.jar" />
             <manifest>
                 <attribute name="DependencyFinder" value="main"/>
-                <attribute name="Main-Class" value="SchoolNavigator.TestRunner" />
+                <attribute name="Main-Class" value="SchoolNavigator.Runner" />
             </manifest>
         </jar>
     </target>
