@@ -1,16 +1,78 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>HCRHS School Navigator</title>
+        <meta name="description" content="HCRHS School Navigator"/>
+        <meta name="author" content="Ben, Eric, Mark"/>
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="css/main.css" rel="stylesheet"/>
+        <!--<link href="css/jumbotron-narrow.css" rel="stylesheet"/>-->
+        
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
     </head>
     <body>
-        <div>TODO write content</div>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">HCRHS School Navigator</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#getdirections">Get Directions</a></li>
+                        <li><a href="#directions">Directions</a></li>
+                        <li><a href="#about">About Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="container main">
+            <h1>Welcome to the HCRHS School Navigator</h1>
+            <p class="lead">Enter a start and end room below to get directions</p>
+            <a name="getdirections"/></a>
+            <div class="page-header">
+                <h2>Get Directions</h2>
+            </div>
+            <div class="jumbotron">
+                <form>
+                    <div class="form-group">
+                        <label for="start" class="form-label">Starting Room</label>
+                        <input type="text" class="form-control form-input" id="start" placeholder="Enter Starting Room"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="end" class="form-label">Ending Room</label>
+                        <input type="text" class="form-control form-input" id="end" placeholder="Enter Ending Room"/>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>
+            </div>
+            <a name="directions"/></a>
+            <div class="page-header">
+                <h2>Directions</h2>
+            </div>
+            <div class="jumbotron">
+                
+            <a name="about"/></a>
+            </div>
+            <div class="page-header">
+                <h2>About Us</h2>
+            </div>
+        </div>
+        <script src="js/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="js/navigator.js"></script>
     </body>
 </html>
