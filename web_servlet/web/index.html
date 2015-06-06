@@ -17,7 +17,7 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body>
+    <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -27,13 +27,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">HCRHS School Navigator</a>
+                    <a class="navbar-brand page-scroll" href="#page-top">HCRHS School Navigator</a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#getdirections">Get Directions</a></li>
-                        <li><a href="#directions">Directions</a></li>
-                        <li><a href="#about">About Us</a></li>
+                        <li class="active"><a class="page-scroll" href="#getdirections">Get Directions</a></li>
+                        <li><a class="page-scroll" href="#directions">Directions</a></li>
+                        <li><a class="page-scroll" href="#about">About Us</a></li>
                     </ul>
                 </div>
             </div>
@@ -42,37 +42,42 @@
         <div class="container main">
             <h1>Welcome to the HCRHS School Navigator</h1>
             <p class="lead">Enter a start and end room below to get directions</p>
-            <a name="getdirections"/></a>
-            <div class="page-header">
-                <h2>Get Directions</h2>
-            </div>
-            <div class="jumbotron">
-                <form>
-                    <div class="form-group">
-                        <label for="start" class="form-label">Starting Room</label>
-                        <input type="text" class="form-control form-input" id="start" placeholder="Enter Starting Room"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="end" class="form-label">Ending Room</label>
-                        <input type="text" class="form-control form-input" id="end" placeholder="Enter Ending Room"/>
-                    </div>
-                    <button type="submit" class="btn btn-success">Submit</button>
-                </form>
-            </div>
-            <a name="directions"/></a>
-            <div class="page-header">
-                <h2>Directions</h2>
-            </div>
-            <div class="jumbotron">
-                
-            <a name="about"/></a>
-            </div>
-            <div class="page-header">
-                <h2>About Us</h2>
-            </div>
+            <section id="getdirections">
+                <div class="page-header">
+                    <h2>Get Directions</h2>
+                </div>
+                <div class="jumbotron">
+                    <form onsubmit="return false">
+                        <div class="form-group">
+                            <label for="start" class="form-label">Starting Room</label>
+                            <input type="text" class="form-control form-input" id="start" name="start" placeholder="Enter Starting Room"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="end" class="form-label">Ending Room</label>
+                            <input type="text" class="form-control form-input" id="end" name="end" placeholder="Enter Ending Room"/>
+                        </div>
+                        <button type="submit" class="btn btn-success" id="sumbit">Submit</button>
+                    </form>
+                </div>
+            </section>
+            <section id="directions">
+                <div class="page-header">
+                    <h2>Directions</h2>
+                </div>
+                <div class="jumbotron" id="output">
+
+                </div>
+            </section>
+            <section id="about">
+                <div class="page-header">
+                    <h2>About Us</h2>
+                </div>
+            </section>
         </div>
         <script src="js/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="js/jquery.easing.min.js"></script>
+        <script src="js/scrolling-nav.js"></script>
         <script src="js/navigator.js"></script>
     </body>
 </html>

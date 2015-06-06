@@ -24,12 +24,14 @@ public class Navigator  extends HttpServlet{
 
         PrintWriter out = response.getWriter();
         String serverAddress = "localhost";
+        String start = request.getParameter("start");
+        String end = request.getParameter("end");
         try {
             Socket s = new Socket(serverAddress, 1234);
             System.out.printf("Connected to: %s\n", s.getLocalAddress());
             PrintWriter output = new PrintWriter(s.getOutputStream(), true);
-            output.println("100,918");
-            System.out.println("Sent: 100,918");
+            output.println(String.format("%s,%s", start, end));
+            System.out.println(String.format("Sent: %s,%s", start, end));
             BufferedReader input = new BufferedReader(new InputStreamReader(s.getInputStream()));
             String answer = "";
             String raw;
@@ -40,11 +42,9 @@ public class Navigator  extends HttpServlet{
                 answer += raw + "<br/>";
             }
             out.print(answer);
+            System.out.println(String.format("Recived: %s", answer));
         } catch(ConnectException e) {
             out.print("Cannot connect to map server");
         }
-        
-        
-        
     }
 }

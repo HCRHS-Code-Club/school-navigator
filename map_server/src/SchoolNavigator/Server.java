@@ -12,9 +12,9 @@ public class Server implements Runnable {
     private boolean isStopped = false;
     private Thread runningThread = null;
     private ExecutorService threadPool = Executors.newFixedThreadPool(10);
-    private BlockingQueue[][] queue = new LinkedBlockingQueue[5][2];
-    private Navigator[] navigators = new Navigator[5];
-    private RoundRobin roundRobin = new RoundRobin(5);
+    private BlockingQueue[][] queue = new LinkedBlockingQueue[10][2];
+    private Navigator[] navigators = new Navigator[10];
+    private RoundRobin roundRobin = new RoundRobin(10);
 
     public Server(int port) {
         this.port = port;

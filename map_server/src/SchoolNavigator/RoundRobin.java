@@ -10,7 +10,7 @@ public class RoundRobin {
 
     public int getNext() {
         index++;
-        if (index == 9)
+        if (index == top)
             index = 0;
         return index;
     }

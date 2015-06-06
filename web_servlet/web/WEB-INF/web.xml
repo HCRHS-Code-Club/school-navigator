@@ -10,11 +10,11 @@
     
     <servlet>
        <servlet-name>SchoolNavigator</servlet-name>
-       <servlet-class>SchoolNavigator.Main</servlet-class>
+       <servlet-class>SchoolNavigator.Navigator</servlet-class>
     </servlet>
 
     <servlet-mapping>
        <servlet-name>SchoolNavigator</servlet-name>
-       <url-pattern>/nav</url-pattern>
+       <url-pattern>/navigator.html</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -1,7 +1,14 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
+$('#sumbit').click(function() {
+    $.ajax({url: "navigator.html",
+        data: {
+            "start": $('#start').val(),
+            "end": $('#end').val()
+        },
+        success: function (data, textStatus, jqXHR) {
+            $('#output').html(data);
+        }
+    });
+    $('html, body').stop().animate({
+                scrollTop: $($('a[href=#directions]').attr('href')).offset().top
+            }, 1500, 'easeInOutExpo');
+});

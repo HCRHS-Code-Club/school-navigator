@@ -2,6 +2,8 @@ package SchoolNavigator;
 
 import java.io.*;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.concurrent.BlockingQueue;
 
 public class Worker implements Runnable{
@@ -26,6 +28,9 @@ public class Worker implements Runnable{
             String response = null;
             int queueNum = roundRobin.getNext();
             raw = input.readLine();
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+            System.out.println( sdf.format(cal.getTime()) );
             System.out.printf("Received: %s\n", raw);
             request = raw.split(",");
             try {
