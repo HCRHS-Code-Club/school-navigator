@@ -1,0 +1,20 @@
+<project name="stress-tester" default="dist" basedir=".">
+    <property name="src.dir" location="src"/>
+    <property name="build.dir" location="build"/>
+    <property name="dist.dir"  location="dist"/>
+
+    <target name="compile" description="compile the source " >
+        <tstamp/>
+        <mkdir dir="${build.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${build.dir}"/>
+    </target>
+
+    <target name="dist" depends="compile" description="generate the distribution" >
+        <mkdir dir="${dist.dir}"/>
+        <jar jarfile="${dist.dir}/stress-tester.jar" basedir="${build.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="Main" />
+            </manifest>
+        </jar>
+    </target>
+</project>
