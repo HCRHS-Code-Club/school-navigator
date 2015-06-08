@@ -12,3 +12,15 @@ $('#sumbit').click(function() {
                 scrollTop: $($('a[href=#directions]').attr('href')).offset().top
             }, 1500, 'easeInOutExpo');
 });
+
+//$('#start').keypress(function(event) {
+//    if(event.keyCode === 13) {
+//        $('#sumbit').click();
+//    }
+//});
+//
+//$('#end').keypress(function(event) {
+//    if(event.keyCode === 13) {
+//        $('#sumbit').click();
+//    }
+//});

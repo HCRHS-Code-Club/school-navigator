@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ConnectException;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,12 +28,13 @@ public class Navigator  extends HttpServlet{
         String start = request.getParameter("start");
         String end = request.getParameter("end");
         try {
-            Socket s = new Socket(serverAddress, 1234);
-            System.out.printf("Connected to: %s\n", s.getLocalAddress());
-            PrintWriter output = new PrintWriter(s.getOutputStream(), true);
+            Socket socket = new Socket();
+            socket.connect(new InetSocketAddress(serverAddress, 1234), 1000);
+            System.out.printf("Connected to: %s\n", socket.getLocalAddress());
+            PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
             output.println(String.format("%s,%s", start, end));
             System.out.println(String.format("Sent: %s,%s", start, end));
-            BufferedReader input = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String answer = "";
             String raw;
             while (true) {
