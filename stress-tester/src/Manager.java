@@ -6,9 +6,12 @@ public class Manager implements Runnable{
     private long time;
     private long totalSuccesses = 0;
     private long totalFailures = 0;
-    private Worker[] workers = new Worker[10];
+    private Worker[] workers;
+    private long pings;
 
-    public Manager() {
+    public Manager(long pings, int threads) {
+        this.pings = pings;
+        workers = new Worker[threads];
         for(int i = 0; i < workers.length; i++) {
             workers[i] = new Worker();
         }
@@ -29,6 +32,8 @@ public class Manager implements Runnable{
                     totalPings += workers[i].getPings();
                 }
                 System.out.printf("\rTotal Pings: %d", totalPings);
+                if(totalPings >= pings)
+                    stop();
                 oldTime = time;
             }
         }
@@ -45,6 +50,10 @@ public class Manager implements Runnable{
 
     public synchronized boolean isStopped() {
         return stopped;
+    }
+
+    public long getTotalPings() {
+        return totalPings;
     }
 
     public synchronized long getTotalSuccesses() {

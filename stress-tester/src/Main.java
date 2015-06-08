@@ -2,17 +2,31 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        int time = Integer.parseInt(args[0]);
-        Manager manager = new Manager();
-        new Thread(manager).start();
+        if(args.length == 1 || args.length == 2) {
+            Manager manager;
+            long pings = Long.parseLong(args[0]), startTime, endTime;
+            int threads;
+            if(args.length == 2)
+                threads = Integer.parseInt(args[1]);
+            else
+                threads = 1;
+            manager = new Manager(pings, threads);
+            new Thread(manager).start();
+            startTime = System.currentTimeMillis();
+            while (!manager.isStopped()){}
+            endTime = System.currentTimeMillis();
+            //manager.stop();
+            System.out.println("\n\n");
+            System.out.printf("Time taken (milliseconds): %d\nSuccesses: %d\nFailures: %d\n", manager.getTotalSuccesses(), manager.getTotalFailures(), endTime-startTime);
+            System.exit(0);
+        } else {
+            System.out.println("One or two arugments must be specified");
+            System.exit(-1);
+        }
 
-        System.out.println("Press any key to exit");
-        Thread.sleep(time);
-        System.out.println("\nStopping...");
 
-        manager.stop();
-        System.out.println("\n\n");
-        System.out.printf("Successes: %d\nFailures: %d\n", manager.getTotalSuccesses(), manager.getTotalFailures());
-        System.exit(0);
+
+
+
     }
 }
