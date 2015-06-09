@@ -59,12 +59,21 @@ public class TestRunner {
             sTemp2 = new Hallway(dStart, startHall.getExit(), startHall.direction);
             eTemp1 = new Hallway(endHall.getEntrance(), dEnd, endHall.direction);
             eTemp2 = new Hallway(dEnd, endHall.getExit(), endHall.direction);
-            startHall.getEntrance().replaceHallway(startHall, sTemp1);
-            startHall.getExit().replaceHallway(startHall, sTemp2);
-            endHall.getEntrance().replaceHallway(endHall, eTemp1);
-            endHall.getExit().replaceHallway(endHall, eTemp2);
-            dStart.setHallways(new ArrayList<Hallway>(Arrays.asList(sTemp1, sTemp2)));
-            dEnd.setHallways(new ArrayList<Hallway>(Arrays.asList(eTemp1, eTemp2)));
+            if(startHall == endHall) {
+                startHall.getEntrance().replaceHallway(startHall, sTemp1);
+                startHall.getExit().replaceHallway(startHall, sTemp2);
+                endHall.getEntrance().replaceHallway(endHall, sTemp2);
+                endHall.getExit().replaceHallway(endHall, eTemp2);
+                dStart.setHallways(new ArrayList<Hallway>(Arrays.asList(sTemp1, sTemp2)));
+                dEnd.setHallways(new ArrayList<Hallway>(Arrays.asList(sTemp2, eTemp2)));
+            } else {
+                startHall.getEntrance().replaceHallway(startHall, sTemp1);
+                startHall.getExit().replaceHallway(startHall, sTemp2);
+                endHall.getEntrance().replaceHallway(endHall, eTemp1);
+                endHall.getExit().replaceHallway(endHall, eTemp2);
+                dStart.setHallways(new ArrayList<Hallway>(Arrays.asList(sTemp1, sTemp2)));
+                dEnd.setHallways(new ArrayList<Hallway>(Arrays.asList(eTemp1, eTemp2)));
+            }
 
             //Find Path
             SchoolMap.computePaths(dStart);
