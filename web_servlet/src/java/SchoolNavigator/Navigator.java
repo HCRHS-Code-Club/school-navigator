@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.net.ConnectException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,6 +49,10 @@ public class Navigator  extends HttpServlet{
             System.out.println(String.format("Recived: %s", answer));
         } catch(ConnectException e) {
             out.print("Cannot connect to map server");
+        } catch(SocketTimeoutException e) {
+            out.print("Cannot connect to map server: Connection timed out");
+        } catch(SocketException e) {
+            out.print("Cannot connect to map server: Connection Reset");
         }
     }
 }
