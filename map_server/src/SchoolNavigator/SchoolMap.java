@@ -128,34 +128,36 @@ public class SchoolMap
             directions += right;
         }
         directions += "\n";
-        for (int i = 0; i+2 < path.size(); i++) {
-            directions += "Turn ";
-            Hallway current = path.get(i).connecting(path.get(i+1));
-            Hallway next = path.get(i+1).connecting(path.get(i+2));
-            if(current.direction.equals(next.direction)) {
-                directions += strait;
-            }else if(current.direction.equals("ew")) {
-                if(current.getEntrance().equals(path.get(i+1)) && next.getEntrance().equals(path.get(i+1))) {
-                    directions += left;
-                } else if(current.getExit().equals(path.get(i+1)) && next.getEntrance().equals(path.get(i+1))) {
-                    directions += right;
-                } else if(current.getEntrance().equals(path.get(i+1)) && next.getExit().equals(path.get(i+1))) {
-                    directions += right;
-                } else if(current.getExit().equals(path.get(i+1)) && next.getExit().equals(path.get(i+1))) {
-                    directions += left;
+        if(path.size() > 2) {
+            for (int i = 0; i + 2 < path.size(); i++) {
+                directions += "Turn ";
+                Hallway current = path.get(i).connecting(path.get(i + 1));
+                Hallway next = path.get(i + 1).connecting(path.get(i + 2));
+                if (current.direction.equals(next.direction)) {
+                    directions += strait;
+                } else if (current.direction.equals("ew")) {
+                    if (current.getEntrance().equals(path.get(i + 1)) && next.getEntrance().equals(path.get(i + 1))) {
+                        directions += left;
+                    } else if (current.getExit().equals(path.get(i + 1)) && next.getEntrance().equals(path.get(i + 1))) {
+                        directions += right;
+                    } else if (current.getEntrance().equals(path.get(i + 1)) && next.getExit().equals(path.get(i + 1))) {
+                        directions += right;
+                    } else if (current.getExit().equals(path.get(i + 1)) && next.getExit().equals(path.get(i + 1))) {
+                        directions += left;
+                    }
+                } else {
+                    if (current.getEntrance().equals(path.get(i + 1)) && next.getEntrance().equals(path.get(i + 1))) {
+                        directions += right;
+                    } else if (current.getExit().equals(path.get(i + 1)) && next.getEntrance().equals(path.get(i + 1))) {
+                        directions += left;
+                    } else if (current.getEntrance().equals(path.get(i + 1)) && next.getExit().equals(path.get(i + 1))) {
+                        directions += left;
+                    } else if (current.getExit().equals(path.get(i + 1)) && next.getExit().equals(path.get(i + 1))) {
+                        directions += right;
+                    }
                 }
-            } else {
-                if(current.getEntrance().equals(path.get(i+1)) && next.getEntrance().equals(path.get(i+1))) {
-                    directions += right;
-                } else if(current.getExit().equals(path.get(i+1)) && next.getEntrance().equals(path.get(i+1))) {
-                    directions += left;
-                } else if(current.getEntrance().equals(path.get(i+1)) && next.getExit().equals(path.get(i+1))) {
-                    directions += left;
-                } else if(current.getExit().equals(path.get(i+1)) && next.getExit().equals(path.get(i+1))) {
-                    directions += right;
-                }
+                directions += "\n";
             }
-            directions += "\n";
         }
         directions += "Turn ";
         if(endHall.direction.equals("ew") && end.face.equals("n") && endHall.getEntrance().equals(path.get(path.size()-2))) {

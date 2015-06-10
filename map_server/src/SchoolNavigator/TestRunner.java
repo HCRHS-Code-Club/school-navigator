@@ -59,13 +59,17 @@ public class TestRunner {
             sTemp2 = new Hallway(dStart, startHall.getExit(), startHall.direction);
             eTemp1 = new Hallway(endHall.getEntrance(), dEnd, endHall.direction);
             eTemp2 = new Hallway(dEnd, endHall.getExit(), endHall.direction);
+            List<Intersection> path;
             if(startHall == endHall) {
-                startHall.getEntrance().replaceHallway(startHall, sTemp1);
-                startHall.getExit().replaceHallway(startHall, sTemp2);
-                endHall.getEntrance().replaceHallway(endHall, sTemp2);
-                endHall.getExit().replaceHallway(endHall, eTemp2);
-                dStart.setHallways(new ArrayList<Hallway>(Arrays.asList(sTemp1, sTemp2)));
-                dEnd.setHallways(new ArrayList<Hallway>(Arrays.asList(sTemp2, eTemp2)));
+                if(start == end) {
+                    path = new ArrayList<Intersection>(Arrays.asList(dStart));
+                } else {
+                    path = new ArrayList<Intersection>(Arrays.asList(dStart, dEnd));
+                }
+                /*sTemp1.setUp(dStart, dEnd);
+                dStart.setHallways(new ArrayList<Hallway>(Arrays.asList(sTemp1)));
+                dEnd.setHallways(new ArrayList<Hallway>(Arrays.asList(sTemp1)));
+                endHall.getEntrance().replaceHallway(endHall, sTemp1);*/
             } else {
                 startHall.getEntrance().replaceHallway(startHall, sTemp1);
                 startHall.getExit().replaceHallway(startHall, sTemp2);
@@ -73,12 +77,13 @@ public class TestRunner {
                 endHall.getExit().replaceHallway(endHall, eTemp2);
                 dStart.setHallways(new ArrayList<Hallway>(Arrays.asList(sTemp1, sTemp2)));
                 dEnd.setHallways(new ArrayList<Hallway>(Arrays.asList(eTemp1, eTemp2)));
+                //Find Path
+                SchoolMap.computePaths(dStart);
+                //System.out.printf("Distance to %d : %.1f\n",dEnd.id, dEnd.minDistance);
+                path = SchoolMap.getShortestPathTo(dEnd);
             }
 
-            //Find Path
-            SchoolMap.computePaths(dStart);
-            //System.out.printf("Distance to %d : %.1f\n",dEnd.id, dEnd.minDistance);
-            List<Intersection> path = SchoolMap.getShortestPathTo(dEnd);
+
             /*System.out.print("Path: ");
             for (Intersection k : path)
                 System.out.print(k.id + ", ");
