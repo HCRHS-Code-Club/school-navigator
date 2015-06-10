@@ -129,35 +129,36 @@ public class SchoolMap
             }
             directions += "\n";
 
-                for (int i = 0; i + 2 < path.size(); i++) {
-                    directions += "Turn ";
-                    Hallway current = path.get(i).connecting(path.get(i + 1));
-                    Hallway next = path.get(i + 1).connecting(path.get(i + 2));
-                    if (current.direction.equals(next.direction)) {
-                        directions += strait;
-                    } else if (current.direction.equals("ew")) {
-                        if (current.getEntrance().equals(path.get(i + 1)) && next.getEntrance().equals(path.get(i + 1))) {
-                            directions += left;
-                        } else if (current.getExit().equals(path.get(i + 1)) && next.getEntrance().equals(path.get(i + 1))) {
-                            directions += right;
-                        } else if (current.getEntrance().equals(path.get(i + 1)) && next.getExit().equals(path.get(i + 1))) {
-                            directions += right;
-                        } else if (current.getExit().equals(path.get(i + 1)) && next.getExit().equals(path.get(i + 1))) {
-                            directions += left;
-                        }
-                    } else {
-                        if (current.getEntrance().equals(path.get(i + 1)) && next.getEntrance().equals(path.get(i + 1))) {
-                            directions += right;
-                        } else if (current.getExit().equals(path.get(i + 1)) && next.getEntrance().equals(path.get(i + 1))) {
-                            directions += left;
-                        } else if (current.getEntrance().equals(path.get(i + 1)) && next.getExit().equals(path.get(i + 1))) {
-                            directions += left;
-                        } else if (current.getExit().equals(path.get(i + 1)) && next.getExit().equals(path.get(i + 1))) {
-                            directions += right;
-                        }
+            int turns = 1;
+            for (int i = 0; i + 2 < path.size(); i++) {
+                Hallway current = path.get(i).connecting(path.get(i + 1));
+                Hallway next = path.get(i + 1).connecting(path.get(i + 2));
+                if (current.direction.equals(next.direction)) {
+                    turns++;
+                } else if (current.direction.equals("ew")) {
+                    if (current.getEntrance().equals(path.get(i + 1)) && next.getEntrance().equals(path.get(i + 1))) {
+                        directions += String.format("Make %d%s %s\n", turns, getEnding(turns), left);
+                    } else if (current.getExit().equals(path.get(i + 1)) && next.getEntrance().equals(path.get(i + 1))) {
+                        directions += String.format("Make %d%s %s\n", turns, getEnding(turns), right);
+                    } else if (current.getEntrance().equals(path.get(i + 1)) && next.getExit().equals(path.get(i + 1))) {
+                        directions += String.format("Make %d%s %s\n", turns, getEnding(turns), right);
+                    } else if (current.getExit().equals(path.get(i + 1)) && next.getExit().equals(path.get(i + 1))) {
+                        directions += String.format("Make %d%s %s\n", turns, getEnding(turns), left);
                     }
-                    directions += "\n";
+                    turns = 1;
+                } else {
+                    if (current.getEntrance().equals(path.get(i + 1)) && next.getEntrance().equals(path.get(i + 1))) {
+                        directions += String.format("Make %d%s %s\n", turns, getEnding(turns), right);
+                    } else if (current.getExit().equals(path.get(i + 1)) && next.getEntrance().equals(path.get(i + 1))) {
+                        directions += String.format("Make %d%s %s\n", turns, getEnding(turns), left);
+                    } else if (current.getEntrance().equals(path.get(i + 1)) && next.getExit().equals(path.get(i + 1))) {
+                        directions += String.format("Make %d%s %s\n", turns, getEnding(turns), left);
+                    } else if (current.getExit().equals(path.get(i + 1)) && next.getExit().equals(path.get(i + 1))) {
+                        directions += String.format("Make %d%s %s\n", turns, getEnding(turns), right);
+                    }
+                    turns = 1;
                 }
+            }
 
             directions += "Turn ";
             if(endHall.direction.equals("ew") && end.face.equals("n") && endHall.getEntrance().equals(path.get(path.size()-2))) {
@@ -230,6 +231,20 @@ public class SchoolMap
             directions += "\nYou have arrived\n";
         }
         return directions;
+    }
+
+    private static Map<Integer, String> endings = new HashMap<Integer, String>();
+    static {
+        endings.put(1, "st");
+        endings.put(2, "nd");
+        endings.put(3, "rd");
+    }
+
+    public static String getEnding(int i) {
+        if(i < 3)
+            return "th";
+        else
+            return endings.get(i);
     }
 
     public static String navigate(String input, String output, List<Hallway> hallways, List<Intersection> intersections) {
