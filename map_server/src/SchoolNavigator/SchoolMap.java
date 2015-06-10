@@ -137,24 +137,24 @@ public class SchoolMap
                     turns++;
                 } else if (current.direction.equals("ew")) {
                     if (current.getEntrance().equals(path.get(i + 1)) && next.getEntrance().equals(path.get(i + 1))) {
-                        directions += String.format("Make %d%s %s\n", turns, getEnding(turns), left);
+                        directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), left);
                     } else if (current.getExit().equals(path.get(i + 1)) && next.getEntrance().equals(path.get(i + 1))) {
-                        directions += String.format("Make %d%s %s\n", turns, getEnding(turns), right);
+                        directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), right);
                     } else if (current.getEntrance().equals(path.get(i + 1)) && next.getExit().equals(path.get(i + 1))) {
-                        directions += String.format("Make %d%s %s\n", turns, getEnding(turns), right);
+                        directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), right);
                     } else if (current.getExit().equals(path.get(i + 1)) && next.getExit().equals(path.get(i + 1))) {
-                        directions += String.format("Make %d%s %s\n", turns, getEnding(turns), left);
+                        directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), left);
                     }
                     turns = 1;
                 } else {
                     if (current.getEntrance().equals(path.get(i + 1)) && next.getEntrance().equals(path.get(i + 1))) {
-                        directions += String.format("Make %d%s %s\n", turns, getEnding(turns), right);
+                        directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), right);
                     } else if (current.getExit().equals(path.get(i + 1)) && next.getEntrance().equals(path.get(i + 1))) {
-                        directions += String.format("Make %d%s %s\n", turns, getEnding(turns), left);
+                        directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), left);
                     } else if (current.getEntrance().equals(path.get(i + 1)) && next.getExit().equals(path.get(i + 1))) {
-                        directions += String.format("Make %d%s %s\n", turns, getEnding(turns), left);
+                        directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), left);
                     } else if (current.getExit().equals(path.get(i + 1)) && next.getExit().equals(path.get(i + 1))) {
-                        directions += String.format("Make %d%s %s\n", turns, getEnding(turns), right);
+                        directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), right);
                     }
                     turns = 1;
                 }
