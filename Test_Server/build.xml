@@ -1,0 +1,29 @@
+<project name="Test_Client" basedir="." default="dist">
+    <description>
+        A test socket server to debug the test client and servlet
+    </description>
+
+    <property name="src.dir" location="src"/>
+    <property name="build.dir" location="build"/>
+    <property name="dist.dir"  location="dist"/>
+
+    <target name="compile" depends="clean" description="compile java code">
+        <tstamp/>
+        <mkdir dir="${build.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${build.dir}"/>
+    </target>
+
+    <target name="dist" depends="compile" description="generate the distribution" >
+        <mkdir dir="${dist.dir}"/>
+        <jar jarfile="${dist.dir}/school-navigator-test-server.jar" basedir="${build.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="Server" />
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+</project>

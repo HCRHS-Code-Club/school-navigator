@@ -14,4 +14,7 @@ test/
 *.iml
 /web_servlet/nbproject/private/
 
+# Netbeans project files
 **/nbproject/**
+nb-build.xml
+web_servlet/lib

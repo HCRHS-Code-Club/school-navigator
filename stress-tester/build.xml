@@ -3,7 +3,7 @@
     <property name="build.dir" location="build"/>
     <property name="dist.dir"  location="dist"/>
 
-    <target name="compile" description="compile the source " >
+    <target name="compile" depends="clean" description="compile the source " >
         <tstamp/>
         <mkdir dir="${build.dir}"/>
         <javac srcdir="${src.dir}" destdir="${build.dir}"/>
@@ -16,5 +16,10 @@
                 <attribute name="Main-Class" value="Main" />
             </manifest>
         </jar>
+    </target>
+	
+	<target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
     </target>
 </project>
