@@ -8,6 +8,7 @@ build/
 dist/
 out/
 test/
+linux-service
 
 #IntelliJ project files
 .idea/

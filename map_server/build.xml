@@ -67,5 +67,6 @@
         <delete dir="${build.dir}"/>
         <delete dir="${dist.dir}"/>
         <delete dir="${test.dir}"/>
+		<delete dir="${linux.dir}"/>
     </target>
 </project>
