@@ -26,7 +26,7 @@
 
     <target name="dist" depends="compile" description="generate the distribution" >
         <mkdir dir="${dist.dir}"/>
-        <war destfile="${dist.dir}/school-navigator-web.war" webxml="${web.dir}/WEB-INF/web.xml">
+        <war destfile="${dist.dir}/SchoolNavigator.war" webxml="${web.dir}/WEB-INF/web.xml">
             <fileset dir = "${web.dir}">
                 <include name = "**/*.*"/>
             </fileset>
