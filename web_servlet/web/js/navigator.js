@@ -1,3 +1,19 @@
+var rooms;
+
+$.getJSON("js/rooms.json", function(data) {
+    rooms = data;
+    var options = {
+        persist: true,
+        maxItems: 1,
+        valueField: 'name',
+        labelField: 'name',
+        options: rooms
+    };
+    
+    $('#start').selectize(options);
+    $('#end').selectize(options);
+});
+
 $('#sumbit').click(function() {
     $.ajax({url: "navigator.html",
         data: {
@@ -13,14 +29,7 @@ $('#sumbit').click(function() {
             }, 1500, 'easeInOutExpo');
 });
 
-//$('#start').keypress(function(event) {
-//    if(event.keyCode === 13) {
-//        $('#sumbit').click();
-//    }
-//});
-//
-//$('#end').keypress(function(event) {
-//    if(event.keyCode === 13) {
-//        $('#sumbit').click();
-//    }
-//});
+
+
+
+
