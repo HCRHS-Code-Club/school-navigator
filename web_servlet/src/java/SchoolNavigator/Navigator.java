@@ -53,6 +53,8 @@ public class Navigator  extends HttpServlet{
             out.print("Cannot connect to map server: Connection timed out");
         } catch(SocketException e) {
             out.print("Cannot connect to map server: Connection Reset");
+        } catch(NullPointerException e) {
+            out.print("Invalide response from map server");
         }
     }
 }
