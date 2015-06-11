@@ -3,10 +3,12 @@ var rooms;
 $.getJSON("js/rooms.json", function(data) {
     rooms = data;
     var options = {
-        persist: true,
+        plugins: ['restore_on_backspace'],
+        persist: false,
         maxItems: 1,
         valueField: 'name',
         labelField: 'name',
+        searchField: 'name',
         options: rooms
     };
     
@@ -29,7 +31,18 @@ $('#sumbit').click(function() {
             }, 1500, 'easeInOutExpo');
 });
 
+$('#start').on("keyup keypress", function(e) {
+  var code = e.keyCode || e.which; 
+  if (code  === 13) {               
+    e.preventDefault();
+    return false;
+  }
+});
 
-
-
-
+$('#end').on("keyup keypress", function(e) {
+  var code = e.keyCode || e.which; 
+  if (code  === 13) {               
+    e.preventDefault();
+    return false;
+  }
+});
