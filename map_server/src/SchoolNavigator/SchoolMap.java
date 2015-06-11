@@ -265,10 +265,12 @@ public class SchoolMap
         }
 
         if(start == null || end == null) {
-            if(start == null)
-                return "Start room not found";
-            if(end == null)
-                return "End room not found";
+            if(start == null && end == null)
+                return "Error: starting and ending rooms not found\n";
+            else if(start == null)
+                return "Error: starting room not found\n";
+            else if(end == null)
+                return "Error: ending room not found\n";
         }
 
         //Setup
