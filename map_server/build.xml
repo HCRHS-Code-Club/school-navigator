@@ -36,6 +36,18 @@
         </jar>
     </target>
 
+    <target name="linux-service" depends="compile" description="generate the distribution" >
+        <mkdir dir="${dist.dir}"/>
+        <copy file="map.xml" todir="${dist.dir}" />
+        <jar jarfile="${dist.dir}/school-navigator.jar" basedir="${build.dir}" excludes="TestRunner.class" >
+            <zipgroupfileset dir="lib" includes="*.jar" />
+            <manifest>
+                <attribute name="DependencyFinder" value="main"/>
+                <attribute name="Main-Class" value="SchoolNavigator.ServiceRunner" />
+            </manifest>
+        </jar>
+    </target>
+
     <target name="test" depends="compile" description="builds the test jar" >
         <mkdir dir="${test.dir}" />
         <copy file="map.xml" todir="${test.dir}" />
