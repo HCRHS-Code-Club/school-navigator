@@ -9,7 +9,7 @@ public class ServiceRunner implements Daemon{
 
     public static void main(String[] args) {
         server = new Server(1234);
-        new Thread(server);
+        new Thread(server).start();
     }
 
     @Override
