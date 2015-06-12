@@ -1,4 +1,4 @@
-<project name="school-navigator" default="dist" basedir=".">
+<project name="school-navigator" default="standard" basedir=".">
     <description>
         Application which finds shortest path through map of school
     </description>
@@ -8,8 +8,10 @@
     <property name="lib.dir"  location="lib"/>
     <property name="scripts.dir" location="scripts"/>
     <property name="dist.dir"  location="dist"/>
-    <property name="linux.dir" location="linux-service"/>
     <property name="test.dir" location="test"/>
+
+    <property name="xml.lib" location="lib/jdom-2.0.6.jar"/>
+    <property name="daemon.lib" location="lib/commons-daemon-1.0.15.jar"/>
 
     <path id="external.classpath">
         <fileset dir="${lib.dir}">
@@ -26,11 +28,14 @@
         </javac>
     </target>
 
-    <target name="dist" depends="compile" description="generate the distribution" >
+    <target name="pre-dist" depends="compile" description="Steps before making distrobution version">
         <mkdir dir="${dist.dir}"/>
         <copy file="map.xml" todir="${dist.dir}" />
+    </target>
+
+    <target name="standard" depends="pre-dist" description="generate the distribution" >
         <jar jarfile="${dist.dir}/school-navigator.jar" basedir="${build.dir}" excludes="TestRunner.class ServiceRunner.class" >
-            <zipgroupfileset dir="lib" includes="*.jar" />
+            <zipgroupfileset dir="lib" includes="${xml.lib}" />
             <manifest>
                 <attribute name="DependencyFinder" value="main"/>
                 <attribute name="Main-Class" value="SchoolNavigator.Runner" />
@@ -38,12 +43,11 @@
         </jar>
     </target>
 
-    <target name="linux-service" depends="compile" description="generate the distribution" >
-        <mkdir dir="${linux.dir}"/>
-        <copy file="map.xml" todir="${linux.dir}" />
-        <copy file="scripts/linux-service.sh" todir="${linux.dir}" />
-        <jar jarfile="${linux.dir}/school-navigator.jar" basedir="${build.dir}" excludes="TestRunner.class Runner.class" >
-            <zipgroupfileset dir="lib" includes="*.jar" />
+    <target name="linux-service" depends="pre-dist" description="generate the distribution" >
+        <copy file="${scripts.dir}/linux-service.sh" todir="${dist.dir}" />
+        <move file="${dist.dir}/linux-service.sh" tofile="${dist.dir}/map-server"/>
+        <jar jarfile="${dist.dir}/school-navigator.jar" basedir="${build.dir}" excludes="TestRunner.class Runner.class" >
+            <zipgroupfileset dir="lib" includes="${xml.lib}, ${daemon.lib}" />
             <manifest>
                 <attribute name="DependencyFinder" value="main"/>
                 <attribute name="Main-Class" value="SchoolNavigator.ServiceRunner" />
@@ -67,6 +71,5 @@
         <delete dir="${build.dir}"/>
         <delete dir="${dist.dir}"/>
         <delete dir="${test.dir}"/>
-		<delete dir="${linux.dir}"/>
     </target>
 </project>
