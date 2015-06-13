@@ -66,6 +66,7 @@ public class SchoolMap
                         if(roomElement.getName().equals("Room")) {
                             tempRoom.roomNumber = roomElement.getAttributeValue("roomNumber");
                             tempRoom.face = roomElement.getAttributeValue("face");
+                            tempRoom.position = roomElement.getAttribute("position").getIntValue();
                             tempRooms.add(new Room(tempRoom));
                         }
                     }
@@ -207,24 +208,46 @@ public class SchoolMap
             directions += "\nExit the room and turn ";
             for(int i = 0; i < startHall.getRooms().length; i++) {
                 if(start == startHall.getRooms()[i]) {
-                    if(startHall.direction.equals("ew") && start.face.equals("n")) {
-                        directions += left;
-                    } else if(startHall.direction.equals("ew") && start.face.equals("s")) {
-                        directions += right;
-                    } else if(startHall.direction.equals("ns") && start.face.equals("e")) {
-                        directions += left;
-                    } else if(startHall.direction.equals("ns") && start.face.equals("w")) {
-                        directions += right;
-                    }
-                    directions += "\nTurn ";
-                    if(startHall.direction.equals("ew") && end.face.equals("n")) {
-                        directions += left;
-                    } else if(startHall.direction.equals("ew") && end.face.equals("s")) {
-                        directions += right;
-                    } else if(startHall.direction.equals("ns") && end.face.equals("e")) {
-                        directions += left;
-                    } else if(startHall.direction.equals("ns") && end.face.equals("w")) {
-                        directions += right;
+                    if(start.position < end.position) {
+                        if (startHall.direction.equals("ew") && start.face.equals("n")) {
+                            directions += left;
+                        } else if (startHall.direction.equals("ew") && start.face.equals("s")) {
+                            directions += right;
+                        } else if (startHall.direction.equals("ns") && start.face.equals("e")) {
+                            directions += left;
+                        } else if (startHall.direction.equals("ns") && start.face.equals("w")) {
+                            directions += right;
+                        }
+                        directions += "\nTurn ";
+                        if (startHall.direction.equals("ew") && end.face.equals("n")) {
+                            directions += left;
+                        } else if (startHall.direction.equals("ew") && end.face.equals("s")) {
+                            directions += right;
+                        } else if (startHall.direction.equals("ns") && end.face.equals("e")) {
+                            directions += left;
+                        } else if (startHall.direction.equals("ns") && end.face.equals("w")) {
+                            directions += right;
+                        }
+                    } else {
+                        if (startHall.direction.equals("ew") && start.face.equals("n")) {
+                            directions += right;
+                        } else if (startHall.direction.equals("ew") && start.face.equals("s")) {
+                            directions += left;
+                        } else if (startHall.direction.equals("ns") && start.face.equals("e")) {
+                            directions += right;
+                        } else if (startHall.direction.equals("ns") && start.face.equals("w")) {
+                            directions += left;
+                        }
+                        directions += "\nTurn ";
+                        if (startHall.direction.equals("ew") && end.face.equals("n")) {
+                            directions += right;
+                        } else if (startHall.direction.equals("ew") && end.face.equals("s")) {
+                            directions += left;
+                        } else if (startHall.direction.equals("ns") && end.face.equals("e")) {
+                            directions += right;
+                        } else if (startHall.direction.equals("ns") && end.face.equals("w")) {
+                            directions += left;
+                        }
                     }
                     break;
                 } else {

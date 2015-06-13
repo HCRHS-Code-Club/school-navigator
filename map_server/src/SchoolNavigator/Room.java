@@ -5,6 +5,7 @@ public class Room {
     public String roomNumber;
     public Hallway hallway;
     public String face;
+    public int position;
 
     public Room(){}
 
@@ -13,5 +14,6 @@ public class Room {
         this.roomNumber = room.roomNumber;
         this.hallway = room.hallway;
         this.face = room.face;
+        this.position = room.position;
     }
 }
