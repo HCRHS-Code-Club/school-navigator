@@ -137,24 +137,48 @@ public class SchoolMap
                     turns++;
                 } else if (current.direction.equals("ew")) {
                     if (current.getEntrance().equals(path.get(i + 1)) && next.getEntrance().equals(path.get(i + 1))) {
-                        directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), left);
+                        if(atEnd(current, current.getEntrance(), "ew"))
+                            directions += String.format("go to the end of the hallway and turn %s\n", left);
+                        else
+                            directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), left);
                     } else if (current.getExit().equals(path.get(i + 1)) && next.getEntrance().equals(path.get(i + 1))) {
-                        directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), right);
+                        if(atEnd(current, current.getExit(), "ew"))
+                            directions += String.format("Go to the end of the hallway and turn %s\n", right);
+                        else
+                            directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), right);
                     } else if (current.getEntrance().equals(path.get(i + 1)) && next.getExit().equals(path.get(i + 1))) {
-                        directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), right);
+                        if(atEnd(current, current.getEntrance(), "ew"))
+                            directions += String.format("Go to the end of the hallway and turn %s\n", right);
+                        else
+                            directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), right);
                     } else if (current.getExit().equals(path.get(i + 1)) && next.getExit().equals(path.get(i + 1))) {
-                        directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), left);
+                        if(atEnd(current, current.getExit(), "ew"))
+                            directions += String.format("Go to the end of the hallway and turn %s\n", left);
+                        else
+                            directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), left);
                     }
                     turns = 1;
                 } else {
                     if (current.getEntrance().equals(path.get(i + 1)) && next.getEntrance().equals(path.get(i + 1))) {
-                        directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), right);
+                        if(atEnd(current, current.getEntrance(), "ns"))
+                            directions += String.format("Go to the end of the hallway and turn %s\n", right);
+                        else
+                            directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), right);
                     } else if (current.getExit().equals(path.get(i + 1)) && next.getEntrance().equals(path.get(i + 1))) {
-                        directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), left);
+                        if(atEnd(current, current.getExit(), "ns"))
+                            directions += String.format("Go to the end of the hallway and turn %s\n", left);
+                        else
+                            directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), left);
                     } else if (current.getEntrance().equals(path.get(i + 1)) && next.getExit().equals(path.get(i + 1))) {
-                        directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), left);
+                        if(atEnd(current, current.getEntrance(), "ns"))
+                            directions += String.format("Go to the end of the hallway and turn %s\n", left);
+                        else
+                            directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), left);
                     } else if (current.getExit().equals(path.get(i + 1)) && next.getExit().equals(path.get(i + 1))) {
-                        directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), right);
+                        if(atEnd(current, current.getExit(), "ns"))
+                            directions += String.format("Go to the end of the hallway and turn %s\n", right);
+                        else
+                            directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), right);
                     }
                     turns = 1;
                 }
@@ -231,6 +255,15 @@ public class SchoolMap
             directions += "\nYou have arrived\n";
         }
         return directions;
+    }
+
+    private static boolean atEnd(Hallway current, Intersection side, String direction) {
+        for(Hallway hallway : side.paths) {
+            if(hallway != current && hallway.direction.equals(direction)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private static Map<Integer, String> endings = new HashMap<Integer, String>();
