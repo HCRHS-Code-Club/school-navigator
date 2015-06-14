@@ -28,6 +28,7 @@ public class TestRunner {
                 break;
 
             directions = SchoolMap.navigate(input, output, hallways, intersections);
+
             System.out.print(directions);
         }
     }

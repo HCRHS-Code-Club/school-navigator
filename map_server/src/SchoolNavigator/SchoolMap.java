@@ -334,10 +334,10 @@ public class SchoolMap
         endHall = end.hallway;
         dStart = new Intersection(20);
         dEnd = new Intersection(21);
-        sTemp1 = new Hallway(startHall.getEntrance(), dStart, startHall.direction);
-        sTemp2 = new Hallway(dStart, startHall.getExit(), startHall.direction);
-        eTemp1 = new Hallway(endHall.getEntrance(), dEnd, endHall.direction);
-        eTemp2 = new Hallway(dEnd, endHall.getExit(), endHall.direction);
+        sTemp1 = new Hallway(startHall.getEntrance(), dStart, startHall.direction, (100 - start.position) * startHall.length);
+        sTemp2 = new Hallway(dStart, startHall.getExit(), startHall.direction, ((100 - start.position) / 100) * startHall.length);
+        eTemp1 = new Hallway(endHall.getEntrance(), dEnd, endHall.direction, (100 - end.position) * endHall.length);
+        eTemp2 = new Hallway(dEnd, endHall.getExit(), endHall.direction, ((100 - end.position) / 100) * endHall.length);
         List<Intersection> path;
         if(startHall == endHall) {
             if(start == end) {

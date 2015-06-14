@@ -9,10 +9,11 @@ public class Hallway {
 
     public Hallway(){}
 
-    public Hallway(Intersection entrance, Intersection exit, String direction) {
+    public Hallway(Intersection entrance, Intersection exit, String direction, double length) {
         this.entrance = entrance;
         this.exit = exit;
         this.direction = direction;
+        this.length = length;
     }
     public Hallway(Hallway hallway) {
         this.id = hallway.id;
