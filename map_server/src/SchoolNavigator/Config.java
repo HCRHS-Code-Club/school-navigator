@@ -18,7 +18,7 @@ public class Config {
     public static int port = 1234;
     public static String mapfile = "map.xml";
 
-    public static void load() throws JDOMException, IOException {
+    public static void load() throws JDOMException, IOException, NumberFormatException {
         if(!configFile.exists()) {
             Element root = new Element("config");
             Document config = new Document(root);

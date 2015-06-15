@@ -26,6 +26,11 @@ public class Server implements Runnable {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (NumberFormatException e) {
+            //e.printStackTrace();
+            System.err.println("Thread or port value not a number");
+            System.err.println("Invalid config file");
+            System.exit(-1);
         }
         port = Config.port;
         queue = new LinkedBlockingQueue[Config.threads][2];
@@ -34,6 +39,7 @@ public class Server implements Runnable {
         File inputFile = new File(Config.mapfile);
         if(!inputFile.exists()) {
             System.err.println("Map file not found");
+            System.err.println("Invalid config file");
             System.exit(-1);
         }
         for(int i = 0; i < navigators.length; i++) {

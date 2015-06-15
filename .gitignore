@@ -9,6 +9,7 @@ dist/
 out/
 test/
 linux-service
+map_server/config.xml
 
 #IntelliJ project files
 .idea/
