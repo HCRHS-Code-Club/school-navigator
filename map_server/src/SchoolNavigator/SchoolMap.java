@@ -144,7 +144,7 @@ public class SchoolMap
                 } else if (current.direction.equals("ew")) {
                     if (current.getEntrance().equals(path.get(i + 1)) && next.getEntrance().equals(path.get(i + 1))) {
                         if(atEnd(current, current.getEntrance(), "ew"))
-                            directions += String.format("go to the end of the hallway and turn %s\n", left);
+                            directions += String.format("Go to the end of the hallway and turn %s\n", left);
                         else
                             directions += String.format("Make the %d%s %s\n", turns, getEnding(turns), left);
                     } else if (current.getExit().equals(path.get(i + 1)) && next.getEntrance().equals(path.get(i + 1))) {
@@ -339,10 +339,10 @@ public class SchoolMap
         endHall = end.hallway;
         dStart = new Intersection(20);
         dEnd = new Intersection(21);
-        sTemp1 = new Hallway(startHall.getEntrance(), dStart, startHall.direction, (100 - start.position) * startHall.length);
-        sTemp2 = new Hallway(dStart, startHall.getExit(), startHall.direction, ((100 - start.position) / 100) * startHall.length);
-        eTemp1 = new Hallway(endHall.getEntrance(), dEnd, endHall.direction, (100 - end.position) * endHall.length);
-        eTemp2 = new Hallway(dEnd, endHall.getExit(), endHall.direction, ((100 - end.position) / 100) * endHall.length);
+        sTemp1 = new Hallway(startHall.getEntrance(), dStart, startHall.direction, ((double)start.position / 100) * startHall.length);
+        sTemp2 = new Hallway(dStart, startHall.getExit(), startHall.direction, ((double)(100 - start.position) / 100) * startHall.length);
+        eTemp1 = new Hallway(endHall.getEntrance(), dEnd, endHall.direction, ((double)end.position / 100) * endHall.length);
+        eTemp2 = new Hallway(dEnd, endHall.getExit(), endHall.direction, ((double)(100 - end.position) / 100) * endHall.length);
         List<Intersection> path;
         if(startHall == endHall) {
             if(start == end) {
