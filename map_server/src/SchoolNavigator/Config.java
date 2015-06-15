@@ -26,7 +26,7 @@ public class Config {
             config.getRootElement().addContent(new Element("port").addContent(Integer.toString(port)));
             config.getRootElement().addContent(new Element("mapfile").addContent(mapfile));
             XMLOutputter xmlOutputter = new XMLOutputter();
-            xmlOutputter.output(config, System.out);
+            System.out.println("Created config file");
             xmlOutputter.setFormat(Format.getPrettyFormat());
             xmlOutputter.output(config, new FileWriter(configFile.getName()));
         } else {
