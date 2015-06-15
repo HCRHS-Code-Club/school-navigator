@@ -1,5 +1,8 @@
 package SchoolNavigator;
 
+import org.jdom2.JDOMException;
+
+import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -12,12 +15,27 @@ public class Server implements Runnable {
     private boolean isStopped = false;
     private Thread runningThread = null;
     private ExecutorService threadPool = Executors.newFixedThreadPool(10);
-    private BlockingQueue[][] queue = new LinkedBlockingQueue[10][2];
-    private Navigator[] navigators = new Navigator[10];
-    private RoundRobin roundRobin = new RoundRobin(10);
+    private BlockingQueue[][] queue;
+    private Navigator[] navigators;
+    private RoundRobin roundRobin;
 
-    public Server(int port) {
-        this.port = port;
+    public Server() {
+        try {
+            Config.load();
+        } catch (JDOMException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        port = Config.port;
+        queue = new LinkedBlockingQueue[Config.threads][2];
+        navigators = new Navigator[Config.threads];
+        roundRobin = new RoundRobin(Config.threads);
+        File inputFile = new File(Config.mapfile);
+        if(!inputFile.exists()) {
+            System.err.println("Map file not found");
+            System.exit(-1);
+        }
         for(int i = 0; i < navigators.length; i++) {
             queue[i][0] = new LinkedBlockingQueue();
             queue[i][1] = new LinkedBlockingQueue();

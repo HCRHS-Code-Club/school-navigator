@@ -1,0 +1,5 @@
+<config>
+    <thread>10</thread>
+    <port>1234</port>
+    <mapfile>map.xml</mapfile>
+</config>

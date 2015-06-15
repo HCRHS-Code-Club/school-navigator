@@ -8,7 +8,7 @@ public class ServiceRunner implements Daemon{
     private static Server server;
 
     public static void main(String[] args) {
-        server = new Server(1234);
+        server = new Server();
         new Thread(server).start();
     }
 

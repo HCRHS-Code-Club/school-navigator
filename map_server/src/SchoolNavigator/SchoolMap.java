@@ -6,6 +6,7 @@ import java.util.*;
 
 import org.jdom2.*;
 import org.jdom2.input.SAXBuilder;
+import org.jdom2.internal.SystemProperty;
 
 public class SchoolMap
 {
@@ -47,7 +48,11 @@ public class SchoolMap
 
     public static void parse(List<Hallway> hallways, List<Intersection> intersections) {
         try {
-            File inputFile = new File("map.xml");
+            File inputFile = new File(Config.mapfile);
+            if(!inputFile.exists()) {
+                System.err.println("Map file not found");
+                System.exit(-1);
+            }
             SAXBuilder saxBuilder = new SAXBuilder();
             Document document = saxBuilder.build(inputFile);
             Element classElement = document.getRootElement();
