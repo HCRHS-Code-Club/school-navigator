@@ -302,7 +302,7 @@ public class SchoolMap
     }
 
     public static String getEnding(int i) {
-        if(i < 3)
+        if(i > 3)
             return "th";
         else
             return endings.get(i);
